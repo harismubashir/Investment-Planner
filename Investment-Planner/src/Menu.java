@@ -71,9 +71,10 @@ public class Menu {
 
         o4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Performance p = new Performance();
 
                 // system.out.print("button pressed");
-                buttonpress.setText("o4 pressed");
+                p.analysis();
             }
 
         }
