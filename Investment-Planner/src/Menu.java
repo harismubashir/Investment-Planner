@@ -19,7 +19,7 @@ public class Menu {
         JButton o4 = new JButton("Review Performance");
         JButton o5 = new JButton("Close");
 
-        list.setBounds(100, 20, 100, 40);
+        list.setBounds(100, 20, 200, 40);
 
         o1.setBounds(75, 80, 200, 40);// x axis, y axis, width, height
         o2.setBounds(75, 140, 200, 40);
@@ -63,8 +63,10 @@ public class Menu {
 
         o3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Edit ed = new Edit();
 
-                buttonpress.setText("o3 pressed");
+                // system.out.print("button pressed");
+                ed.editplan();
             }
 
         });
