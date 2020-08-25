@@ -5,91 +5,70 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Menu {
-    public Menu() {
-        setupGUI();
+    public Menu(String name) {
+        setupGUI(name);
     }
 
-    private void setupGUI() {
-        JFrame menuform = new JFrame();// creating instance of JFrame
+    private void setupGUI(String menuName) {
+        JFrame menuForm = new JFrame();
 
-        JLabel list = new JLabel("List of Planning Options");
+        JLabel list = new JLabel("List of Planning Options for" + menuName);
 
-        JLabel buttonpress = new JLabel("No button pressed");
-
-        JButton o1 = new JButton("Create Portfolio");// creating instance of JButton
-        JButton o2 = new JButton("View Portfolio");
-        JButton o3 = new JButton("Edit Portfolio");
-        JButton o4 = new JButton("Review Performance");
-        JButton o5 = new JButton("Close");
+        JButton createButton = new JButton("CreateEdit Portfolio");
+        JButton editButton = new JButton("Edit Portfolio");
+        JButton reviewButton = new JButton("Review Performance");
+        JButton closeButton = new JButton("Close");
 
         list.setBounds(100, 20, 200, 40);
 
-        o1.setBounds(75, 80, 200, 40);// x axis, y axis, width, height
-        o2.setBounds(75, 140, 200, 40);
-        o3.setBounds(75, 200, 200, 40);
-        o4.setBounds(75, 260, 200, 40);
-        o5.setBounds(110, 320, 100, 40);
+        createButton.setBounds(75, 80, 200, 40);
+        editButton.setBounds(75, 200, 200, 40);
+        reviewButton.setBounds(75, 260, 200, 40);
+        closeButton.setBounds(110, 320, 100, 40);
 
-        // adding labels and fields to form
-        menuform.add(list);
-        menuform.add(o1);
-        menuform.add(o2);
-        menuform.add(o3);
-        menuform.add(o4);
-        menuform.add(o5);
+        menuForm.add(list);
+        menuForm.add(createButton);
+        menuForm.add(editButton);
+        menuForm.add(reviewButton);
+        menuForm.add(closeButton);
 
-        menuform.setSize(800, 1000);// 400 width and 500 height
-        menuform.setLayout(null);// using no layout managers
-        menuform.setVisible(true);// making the frame visible
+        menuForm.setSize(800, 1000);
+        menuForm.setLayout(null);
+        menuForm.setVisible(true);
 
-        // adding action listener to buttons
-
-        o1.addActionListener(new ActionListener() {
+        createButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                Create c = new Create();
-
-                c.createPlan(Mode.CREATING);
+                CreateEdit c = new CreateEdit();
+                c.CreateEditPlan(Mode.CREATING);
 
             }
 
         });
 
-        o2.addActionListener(new ActionListener() {
+        editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                CreateEdit c = new CreateEdit();
 
-                // system.out.print("button pressed");
-                buttonpress.setText("o2 pressed");
+                c.CreateEditPlan(Mode.EDITING);
             }
 
         });
 
-        o3.addActionListener(new ActionListener() {
+        reviewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Create c = new Create();
+                Performance performance = new Performance();
 
-                c.createPlan(Mode.EDITING);
-            }
-
-        });
-
-        o4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Performance p = new Performance();
-
-                // system.out.print("button pressed");
-                p.analysis();
+                performance.show();
             }
 
         }
 
         );
 
-        o5.addActionListener(new ActionListener() {
+        closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                // system.out.print("button pressed");
-                menuform.setVisible(false);
+                menuForm.setVisible(false);
             }
 
         });

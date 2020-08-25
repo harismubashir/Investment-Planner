@@ -8,50 +8,37 @@ import javax.swing.JTextField;
 public class Login {
     public void show() {
 
-        JFrame f = new JFrame();// creating instance of JFrame
+        JFrame loginForm = new JFrame();
+        JButton loginButton = new JButton("click");
+        JLabel nameLabel = new JLabel("Name");
+        JLabel passwordLabel = new JLabel("Password");
+        JTextField nameTextField = new JTextField("Name", 30);
+        JTextField passwordTextField = new JTextField("*******", 30);
 
-        JButton b = new JButton("click");// creating instance of JButton
+        loginButton.setBounds(75, 150, 100, 40);
+        nameLabel.setBounds(50, 25, 100, 40);
+        nameTextField.setBounds(150, 25, 100, 40);
+        passwordLabel.setBounds(50, 75, 100, 40);
+        passwordTextField.setBounds(150, 75, 100, 40);
 
-        // creating labels for login
-        JLabel nlabel = new JLabel("Name");
-        JLabel plabel = new JLabel("Password");
+        loginForm.setName("Login");
 
-        // initiating textfields for Java
-        JTextField ntf = new JTextField("Name", 30);
-        JTextField ptf = new JTextField("*******", 30);
+        loginForm.add(nameLabel);
+        loginForm.add(nameTextField);
+        loginForm.add(passwordLabel);
+        loginForm.add(passwordTextField);
 
-        // setting bounds of all text fields and labels
+        loginForm.add(loginButton);
 
-        b.setBounds(75, 150, 100, 40);// x axis, y axis, width, height
+        loginForm.setSize(400, 500);
+        loginForm.setLayout(null);
+        loginForm.setVisible(true);
 
-        nlabel.setBounds(50, 25, 100, 40);
-        ntf.setBounds(150, 25, 100, 40);
-        plabel.setBounds(50, 75, 100, 40);
-        ptf.setBounds(150, 75, 100, 40);
-
-        // form label
-        f.setName("Login");
-
-        // adding labels and fields to form
-        f.add(nlabel);
-        f.add(ntf);
-        f.add(plabel);
-        f.add(ptf);
-
-        f.add(b);// adding button in JFrame
-
-        f.setSize(400, 500);// 400 width and 500 height
-        f.setLayout(null);// using no layout managers
-        f.setVisible(true);// making the frame visible
-
-        // adding action listener to button
-
-        b.addActionListener(new ActionListener() {
+        loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                // system.out.print("button pressed");
-                ntf.setText("button pressed");
-                new Menu(ntf.getText());
+                nameTextField.setText("button pressed");
+                new Menu(nameTextField.getText());
             }
 
         }

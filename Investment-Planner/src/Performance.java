@@ -8,61 +8,57 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Performance {
-    public void analysis() {
+    public void show() {
 
-        JFrame performanceform = new JFrame();// creating instance of JFrame
+        JFrame performanceForm = new JFrame();
 
-        JLabel performancelabel = new JLabel("Investment Performance");
-        JLabel drlabel = new JLabel("Dollar Return");
-        JLabel prlabel = new JLabel("Percentage Return");
-        JLabel mglabel = new JLabel("Monthly Growth");
-        JLabel pclabel = new JLabel("Performance Chart");
+        JLabel performanceLabel = new JLabel("Investment Performance");
+        JLabel dollarReturnLabel = new JLabel("Dollar Return");
+        JLabel percentageReturnLabel = new JLabel("Percentage Return");
+        JLabel monthlyGrowthLabel = new JLabel("Monthly Growth");
+        JLabel performanceChartLabel = new JLabel("Performance Chart");
 
-        JTextField drtext = new JTextField("Name of plan", 30);
-        JTextField prtext = new JTextField("$", 30);
-        JTextField mgtext = new JTextField("$", 30);
-        JTextField pctext = new JTextField("...---~|```", 30);
+        JTextField dollarReturnTextField = new JTextField("Name of plan", 30);
+        JTextField percentageReturnTextField = new JTextField("$", 30);
+        JTextField monthlyGrowthTextField = new JTextField("$", 30);
+        JTextField percentageReturnTextfield = new JTextField("...---~|```", 30);
 
-        JButton closebutton = new JButton("Close");// creating instance of JButton
+        JButton closebutton = new JButton("Close");
 
-        performancelabel.setBounds(100, 20, 120, 40);
+        performanceLabel.setBounds(100, 20, 120, 40);
 
-        drlabel.setBounds(75, 80, 200, 40);// x axis, y axis, width, height
-        prlabel.setBounds(75, 140, 200, 40);
-        mglabel.setBounds(75, 200, 200, 40);
-        pclabel.setBounds(125, 260, 200, 40);
+        dollarReturnLabel.setBounds(75, 80, 200, 40);
+        percentageReturnLabel.setBounds(75, 140, 200, 40);
+        monthlyGrowthLabel.setBounds(75, 200, 200, 40);
+        performanceChartLabel.setBounds(125, 260, 200, 40);
         closebutton.setBounds(110, 520, 100, 40);
 
-        drtext.setBounds(200, 80, 200, 40);// x axis, y axis, width, height
-        prtext.setBounds(200, 140, 200, 40);
-        mgtext.setBounds(200, 200, 200, 40);
-        pctext.setBounds(100, 300, 200, 200);
+        dollarReturnTextField.setBounds(200, 80, 200, 40);
+        percentageReturnTextField.setBounds(200, 140, 200, 40);
+        monthlyGrowthTextField.setBounds(200, 200, 200, 40);
+        percentageReturnTextfield.setBounds(100, 300, 200, 200);
 
-        // adding labels and fields to form
-        performanceform.add(performancelabel);
-        performanceform.add(drlabel);
-        performanceform.add(prlabel);
-        performanceform.add(mglabel);
-        performanceform.add(pclabel);
+        performanceForm.add(performanceLabel);
+        performanceForm.add(dollarReturnLabel);
+        performanceForm.add(percentageReturnLabel);
+        performanceForm.add(monthlyGrowthLabel);
+        performanceForm.add(performanceChartLabel);
 
-        performanceform.add(closebutton);
+        performanceForm.add(closebutton);
 
-        performanceform.add(drtext);
-        performanceform.add(prtext);
-        performanceform.add(mgtext);
-        performanceform.add(pctext);
+        performanceForm.add(dollarReturnTextField);
+        performanceForm.add(percentageReturnTextField);
+        performanceForm.add(monthlyGrowthTextField);
+        performanceForm.add(percentageReturnTextfield);
 
-        performanceform.setSize(800, 1000);// 400 width and 500 height
-        performanceform.setLayout(null);// using no layout managers
-        performanceform.setVisible(true);// making the frame visible
-
-        // adding action listener to buttons
+        performanceForm.setSize(800, 1000);
+        performanceForm.setLayout(null);
+        performanceForm.setVisible(true);
 
         closebutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                // system.out.print("button pressed");
-                performanceform.setVisible(false);
+                performanceForm.setVisible(false);
             }
 
         });

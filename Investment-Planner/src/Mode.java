@@ -1,3 +1,4 @@
+
 public enum Mode {
-    CREATING, EDITING
+    CREATING, EDITING, ADD, DELETE
 }

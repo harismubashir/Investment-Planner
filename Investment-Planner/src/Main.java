@@ -1,7 +1,7 @@
 class Main {
     public static void main(String[] args) {
-        Login l = new Login();
+        Login loginForm = new Login();
 
-        l.show();
+        loginForm.show();
     }
 }
