@@ -12,7 +12,7 @@ public class Menu {
     private void setupGUI(String menuName) {
         JFrame menuForm = new JFrame();
 
-        JLabel list = new JLabel("List of Planning Options for" + menuName);
+        JLabel list = new JLabel("List of Planning Options for " + menuName);
 
         JButton createButton = new JButton("Create Portfolio");
         JButton editButton = new JButton("Edit Portfolio");
