@@ -5,8 +5,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Menu {
-    public void options() {
+    public Menu() {
+        setupGUI();
+    }
 
+    private void setupGUI() {
         JFrame menuform = new JFrame();// creating instance of JFrame
 
         JLabel list = new JLabel("List of Planning Options");
@@ -46,7 +49,7 @@ public class Menu {
 
                 Create c = new Create();
 
-                c.createplan();
+                c.createPlan(Mode.CREATING);
 
             }
 
@@ -63,10 +66,9 @@ public class Menu {
 
         o3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Edit ed = new Edit();
+                Create c = new Create();
 
-                // system.out.print("button pressed");
-                ed.editplan();
+                c.createPlan(Mode.EDITING);
             }
 
         });
@@ -91,7 +93,6 @@ public class Menu {
             }
 
         });
-
     }
 
 }

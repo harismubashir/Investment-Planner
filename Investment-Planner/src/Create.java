@@ -8,61 +8,70 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Create {
-    public void createplan() {
+    // Hash Map
 
-        JFrame createform = new JFrame();// creating instance of JFrame
+    public void createplan(Mode mode) {
 
-        JLabel createlabel = new JLabel("Create Plan");
-        JLabel nplabel = new JLabel("Name of plan");
-        JLabel tflabel = new JLabel("Total funds lump sum");
-        JLabel rclabel = new JLabel("Recurring contribution");
-        JLabel rtlabel = new JLabel("Risk Tolerance");
+        JFrame createForm = new JFrame();// creating instance of JFrame
 
-        JTextField nptext = new JTextField("Name of plan", 30);
-        JTextField tftext = new JTextField("$", 30);
-        JTextField rctext = new JTextField("$", 30);
-        JTextField rttext = new JTextField("5", 30);
+        JLabel createLabel = new JLabel((mode == Mode.CREATING) ? "Create Plan" : "Edit Plan");
 
-        JButton sibutton = new JButton("Select Investment");// creating instance of JButton
+        JLabel namePlanLabel = new JLabel("Name of plan");
+        JLabel totalFundsLabel = new JLabel("Total funds lump sum");
+        JLabel recurringContributionLabel = new JLabel("Recurring contribution");
+        JLabel riskToleranceLabel = new JLabel("Risk Tolerance");
 
-        createlabel.setBounds(100, 20, 120, 40);
+        JTextField namePlanTextField = new JTextField("Name of plan", 30);
+        JTextField totalFundsTextField = new JTextField("$", 30);
+        JTextField recurringContributionTextFied = new JTextField("$", 30);
+        JTextField riskToleranceTextField = new JTextField("5", 30);
 
-        nplabel.setBounds(75, 80, 200, 40);// x axis, y axis, width, height
-        tflabel.setBounds(75, 140, 200, 40);
-        rclabel.setBounds(75, 200, 200, 40);
-        rtlabel.setBounds(75, 260, 200, 40);
-        sibutton.setBounds(110, 320, 100, 40);
+        JButton selectInvestmentButton = new JButton("Select Investment");// creating instance of JButton
 
-        nptext.setBounds(150, 80, 200, 40);// x axis, y axis, width, height
-        tftext.setBounds(150, 140, 200, 40);
-        rctext.setBounds(150, 200, 200, 40);
-        rttext.setBounds(150, 260, 200, 40);
+        createLabel.setBounds(100, 20, 120, 40);
+
+        namePlanLabel.setBounds(75, 80, 200, 40);// x axis, y axis, width, height
+        totalFundsLabel.setBounds(75, 140, 200, 40);
+        recurringContributionLabel.setBounds(75, 200, 200, 40);
+        riskToleranceLabel.setBounds(75, 260, 200, 40);
+        selectInvestmentButton.setBounds(110, 320, 100, 40);
+
+        namePlanTextField.setBounds(150, 80, 200, 40);// x axis, y axis, width, height
+        totalFundsTextField.setBounds(150, 140, 200, 40);
+        recurringContributionTextFied.setBounds(150, 200, 200, 40);
+        riskToleranceTextField.setBounds(150, 260, 200, 40);
 
         // adding labels and fields to form
-        createform.add(createlabel);
-        createform.add(nplabel);
-        createform.add(tflabel);
-        createform.add(rclabel);
-        createform.add(rttext);
+        createForm.add(createLabel);
+        createForm.add(namePlanLabel);
+        createForm.add(totalFundsLabel);
+        createForm.add(recurringContributionLabel);
+        createForm.add(riskToleranceLabel);
 
-        createform.add(sibutton);
+        createForm.add(selectInvestmentButton);
 
-        createform.add(nptext);
-        createform.add(tftext);
-        createform.add(rctext);
-        createform.add(rttext);
+        createForm.add(namePlanTextField);
+        createForm.add(totalFundsTextField);
+        createForm.add(recurringContributionTextFied);
+        createForm.add(riskToleranceTextField);
 
-        createform.setSize(800, 1000);// 400 width and 500 height
-        createform.setLayout(null);// using no layout managers
-        createform.setVisible(true);// making the frame visible
+        createForm.setSize(800, 1000);// 400 width and 500 height
+        createForm.setLayout(null);// using no layout managers
+        createForm.setVisible(true);// making the frame visible
 
         // adding action listener to buttons
 
-        sibutton.addActionListener(new ActionListener() {
+        selectInvestmentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 // system.out.print("button pressed");
-                sibutton.setText("SI pressed");
+                selectInvestmentButton.setText("SI pressed");
+
+                if (mode == Mode.CREATING) {
+
+                } else {
+
+                }
             }
 
         });

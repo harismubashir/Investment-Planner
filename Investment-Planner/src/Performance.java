@@ -69,4 +69,14 @@ public class Performance {
 
     }
 
+    /**
+     * Does x
+     *
+     * @param roi    this is the ROI that should be passed to this function
+     * @param months pass in the length of the investment in months
+     */
+    public void calculatePerformanceMetric(int roi, int months) {
+
+    }
+
 }

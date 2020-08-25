@@ -51,8 +51,7 @@ public class Login {
 
                 // system.out.print("button pressed");
                 ntf.setText("button pressed");
-                Menu m = new Menu();
-                m.options();
+                new Menu(ntf.getText());
             }
 
         }
