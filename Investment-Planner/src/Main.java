@@ -3,5 +3,6 @@ class Main {
         Login loginForm = new Login();
 
         loginForm.show();
+        // new login form
     }
 }
