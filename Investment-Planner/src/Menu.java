@@ -14,7 +14,7 @@ public class Menu {
 
         JLabel list = new JLabel("List of Planning Options for" + menuName);
 
-        JButton createButton = new JButton("CreateEdit Portfolio");
+        JButton createButton = new JButton("Create Portfolio");
         JButton editButton = new JButton("Edit Portfolio");
         JButton reviewButton = new JButton("Review Performance");
         JButton closeButton = new JButton("Close");
@@ -22,9 +22,9 @@ public class Menu {
         list.setBounds(100, 20, 200, 40);
 
         createButton.setBounds(75, 80, 200, 40);
-        editButton.setBounds(75, 200, 200, 40);
-        reviewButton.setBounds(75, 260, 200, 40);
-        closeButton.setBounds(110, 320, 100, 40);
+        editButton.setBounds(75, 140, 200, 40);
+        reviewButton.setBounds(75, 200, 200, 40);
+        closeButton.setBounds(110, 260, 100, 40);
 
         menuForm.add(list);
         menuForm.add(createButton);

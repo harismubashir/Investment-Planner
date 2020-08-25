@@ -9,7 +9,7 @@ public class Login {
     public void show() {
 
         JFrame loginForm = new JFrame();
-        JButton loginButton = new JButton("click");
+        JButton loginButton = new JButton("Login");
         JLabel nameLabel = new JLabel("Name");
         JLabel passwordLabel = new JLabel("Password");
         JTextField nameTextField = new JTextField("Name", 30);
@@ -37,7 +37,6 @@ public class Login {
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                nameTextField.setText("button pressed");
                 new Menu(nameTextField.getText());
             }
 
