@@ -40,7 +40,7 @@ public class Menu {
             public void actionPerformed(ActionEvent e) {
 
                 CreateEdit c = new CreateEdit();
-                c.CreateEditPlan(Mode.CREATING);
+                c.CreateEditPlan(Mode.CREATING); // TODO: merge with constructor
 
             }
 

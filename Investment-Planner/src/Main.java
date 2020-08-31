@@ -1,8 +1,12 @@
 class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Login loginForm = new Login();
+        try {
+            loginForm.show();
+        } finally {
 
-        loginForm.show();
-        // new login form
+            System.out.println("Unhandled Exception occured");
+        }
+
     }
 }
