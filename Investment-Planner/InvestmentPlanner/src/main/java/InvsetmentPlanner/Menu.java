@@ -39,8 +39,7 @@ public class Menu {
         createButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                CreateEdit c = new CreateEdit();
-                c.CreateEditPlan(Mode.CREATING); // TODO: merge with constructor
+                CreateEdit c = new CreateEdit(Mode.CREATING);
 
             }
 

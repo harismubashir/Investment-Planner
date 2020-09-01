@@ -59,9 +59,11 @@ public class Login {
 
                         if (lineCount == 0) {
                             actualUsername = fileReadData;
+
                         } else {
                             actualPassword = fileReadData;
                         }
+                        lineCount++;
 
                         // TODO: store the first line into actualUsername, store the second line in
                         // actualPassword

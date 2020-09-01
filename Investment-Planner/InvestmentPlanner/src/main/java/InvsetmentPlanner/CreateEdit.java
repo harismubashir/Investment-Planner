@@ -9,7 +9,11 @@ import java.awt.event.ActionEvent;
 
 public class CreateEdit {
 
-    public void CreateEditPlan(Mode mode) {
+    public CreateEdit(Mode mode) {
+        createEditPlan(mode);
+    }
+
+    public void createEditPlan(Mode mode) {
 
         JFrame createForm = new JFrame();
 
