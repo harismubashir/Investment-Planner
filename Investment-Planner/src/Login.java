@@ -59,10 +59,8 @@ public class Login {
 
                         if (lineCount == 0) {
                             actualUsername = fileReadData;
-                            System.out.println(actualUsername);
                         } else {
                             actualPassword = fileReadData;
-                            System.out.println(actualPassword);
                         }
 
                         // TODO: store the first line into actualUsername, store the second line in
