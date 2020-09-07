@@ -1,4 +1,4 @@
-package InvestmentPlanner;
+package InvesttmentPlanner;
 
 import org.junit.jupiter.api.Test;
 

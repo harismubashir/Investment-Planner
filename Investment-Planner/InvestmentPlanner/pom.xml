@@ -64,6 +64,11 @@
         <version>${maven-checkstyle-plugin.version}</version>
         <dependencies>
           <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.10.00</version>
+          </dependency>
+          <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
             <version>${checkstyle.version}</version>
