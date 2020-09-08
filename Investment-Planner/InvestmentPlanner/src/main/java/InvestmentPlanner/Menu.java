@@ -42,16 +42,15 @@ public class Menu {
             public void actionPerformed(ActionEvent e) {
 
                 CreateEdit c = new CreateEdit(Mode.CREATING);
-
+                c.createEditPlan(Mode.CREATING);
             }
 
         });
 
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CreateEdit c = new CreateEdit();
-
-                c.CreateEditPlan(Mode.EDITING);
+                CreateEdit c = new CreateEdit(Mode.EDITING);
+                c.createEditPlan(Mode.EDITING);
             }
 
         });

@@ -24,6 +24,11 @@
   </properties>
   <dependencies>
     <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.10.00</version>
+    </dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.version}</version>
@@ -64,11 +69,6 @@
         <version>${maven-checkstyle-plugin.version}</version>
         <dependencies>
           <dependency>
-            <groupId>com.konghq</groupId>
-            <artifactId>unirest-java</artifactId>
-            <version>3.10.00</version>
-          </dependency>
-          <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
             <version>${checkstyle.version}</version>
@@ -78,6 +78,13 @@
             <artifactId>checkstyle-rules</artifactId>
             <version>${checkstyle-rules.version}</version>
           </dependency>
+
+          <dependency>
+              <groupId>com.mashape.unirest</groupId>
+              <artifactId>unirest-java</artifactId>
+              <version>1.4.9</version>
+            </dependency>
+
         </dependencies>
         <configuration>
           <configLocation>com/github/ngeor/checkstyle.xml</configLocation>
