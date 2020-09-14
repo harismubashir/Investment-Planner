@@ -3,6 +3,8 @@ package InvestmentPlanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,14 +17,15 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Login {
 
-    public void show() throws Exception {
+    public void show() {
 
         JFrame loginForm = new JFrame();
         JButton loginButton = new JButton("Login");
         JLabel nameLabel = new JLabel("Name");
         JLabel passwordLabel = new JLabel("Password");
+
         JTextField nameTextField = new JTextField("Name", 30);
-        JTextField passwordTextField = new JTextField("*******", 30);
+        JPasswordField passwordTextField = new JPasswordField("*******", 30);
 
         loginButton.setBounds(75, 150, 100, 40);
         nameLabel.setBounds(50, 25, 100, 40);
@@ -40,6 +43,7 @@ public class Login {
         loginForm.add(loginButton);
 
         loginForm.setSize(400, 500);
+        loginForm.setTitle("Login to Investment Planner");
         loginForm.setLayout(null);
         loginForm.setVisible(true);
 
@@ -93,9 +97,6 @@ public class Login {
         }
 
         );
-
-        Exception newException = new Exception();
-        throw newException;
     }
 
 }

@@ -1,5 +1,6 @@
 package InvestmentPlanner;
 
+import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
 /**
@@ -19,15 +20,10 @@ public final class App {
         HttpResponse<String> httpResponse = Unirest.get(
                 "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo")
                 .asString();
-        System.out.println(httpResponse);
+        System.out.println(httpResponse.getBody()); // TODO: parse the json
 
         Login loginForm = new Login();
-        try {
-            loginForm.show();
-        } catch (Exception e1) {
+        loginForm.show();
 
-            System.out.println("Unhandled Exception occured");
-
-        }
     }
 }
