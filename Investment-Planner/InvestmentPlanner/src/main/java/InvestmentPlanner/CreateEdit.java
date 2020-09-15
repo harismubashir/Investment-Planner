@@ -20,12 +20,12 @@ public class CreateEdit {
 
         JLabel createLabel = new JLabel((mode == Mode.CREATING) ? "Create Plan" : "Edit Plan");
 
-        JLabel namePlanLabel = new JLabel("Name of plan");
+        JLabel namePlanLabel = new JLabel("Plan Number");
         JLabel totalFundsLabel = new JLabel("Total funds lump sum");
         JLabel recurringContributionLabel = new JLabel("Recurring contribution");
         JLabel riskToleranceLabel = new JLabel("Risk Tolerance");
 
-        JTextField namePlanTextField = new JTextField("Name of plan", 30);
+        JTextField namePlanTextField = new JTextField("Plan No", 30);
         JTextField totalFundsTextField = new JTextField("$", 30);
         JTextField recurringContributionTextFied = new JTextField("$", 30);
         JTextField riskToleranceTextField = new JTextField("5", 30);
