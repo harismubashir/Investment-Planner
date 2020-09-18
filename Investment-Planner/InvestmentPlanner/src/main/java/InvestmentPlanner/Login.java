@@ -4,13 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
-
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -51,45 +45,20 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 String name = nameTextField.getText();
                 String password = passwordTextField.getText();
-                String actualUsername = "";
-                String actualPassword = "";
-                int lineCount = 0;
-                String filePath = "C:\\Users\\Haris\\Desktop\\test.txt";
-                BufferedReader br;
-                String fileReadData;
+                String inputData[] = { name, password };
+                FileReadWrite read = new FileReadWrite();
 
-                try {
-                    br = new BufferedReader(new FileReader(new File(filePath)));
-                    while ((fileReadData = br.readLine()) != null) {
-                        System.out.println(fileReadData);
+                Boolean loginMatch = read.readWrite(Mode.READ, inputData);
 
-                        if (lineCount == 0) {
-                            actualUsername = fileReadData;
+                // String actualUsername = actualData[0];
+                // String actualPassword = actualData[1];
 
-                        } else {
-                            actualPassword = fileReadData;
-                        }
-                        lineCount++;
-
-                        // TODO: store the first line into actualUsername, store the second line in
-                        // actualPassword
-                    }
-                } catch (FileNotFoundException e1) {
-                    showMessageDialog(null, "File " + filePath + " not found. Program will be closed");
-
-                    // TODO: tell the user the file was not found and terminate the program
-                } catch (IOException e1) {
-                    showMessageDialog(null, "File " + filePath + " could not be read");
-                    // TODO: something went wrong
-                }
-
-                if (name.equals(actualUsername) && password.equals(actualPassword)) {
+                if (loginMatch == true) {
 
                     new Menu(nameTextField.getText());
                 } else {
 
                     showMessageDialog(null, "Password or username do not match");
-                    // TODO: show alert
                 }
 
             }
