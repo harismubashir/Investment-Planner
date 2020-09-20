@@ -10,13 +10,12 @@ import java.io.Writer;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class FileReadWrite {
-    public Boolean readWrite(Mode mode, String dataWrite[]) {
+    public String[] readWrite(Mode mode, String dataWrite[]) {
 
         String filePath = "C:\\Users\\Haris\\Desktop\\test.txt";
         BufferedReader readerData;
         String fileReadData;
         String loginData[] = { "", "" };
-        Boolean loginMatch = false;
 
         int readCount = 0;
 
@@ -24,7 +23,7 @@ public class FileReadWrite {
             try {
                 readerData = new BufferedReader(new FileReader(new File(filePath)));
                 while ((fileReadData = readerData.readLine()) != null) {
-                    System.out.println(fileReadData);
+                    // System.out.println(fileReadData);
 
                     if (readCount == 0) {
                         loginData[0] = fileReadData;
@@ -42,8 +41,7 @@ public class FileReadWrite {
                 showMessageDialog(null, "File " + filePath + " could not be read");
             }
 
-            if (loginData[0] == dataWrite[0] && loginData[1] == dataWrite[1])
-                loginMatch = true;
+            // TODO: return the data and let Login page do the comparison
 
         }
 
@@ -66,6 +64,6 @@ public class FileReadWrite {
 
         }
 
-        return (loginMatch);
+        return loginData;
     }
 }

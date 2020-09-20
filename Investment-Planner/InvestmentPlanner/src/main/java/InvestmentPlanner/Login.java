@@ -4,9 +4,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Login {
@@ -27,8 +27,6 @@ public class Login {
         passwordLabel.setBounds(50, 75, 100, 40);
         passwordTextField.setBounds(150, 75, 100, 40);
 
-        loginForm.setName("Login");
-
         loginForm.add(nameLabel);
         loginForm.add(nameTextField);
         loginForm.add(passwordLabel);
@@ -43,29 +41,23 @@ public class Login {
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 String name = nameTextField.getText();
                 String password = passwordTextField.getText();
-                String inputData[] = { name, password };
+                String[] inputData = { name, password };
                 FileReadWrite read = new FileReadWrite();
 
-                Boolean loginMatch = read.readWrite(Mode.READ, inputData);
+                String[] credentials = read.readWrite(Mode.READ, inputData);
+                System.out.println(credentials.toString());
 
-                // String actualUsername = actualData[0];
-                // String actualPassword = actualData[1];
-
-                if (loginMatch == true) {
-
+                // TODO: check the username pass
+                if (credentials[0].equals(name) && credentials[1].equals(password)) {
                     new Menu(nameTextField.getText());
-                } else {
-
-                    showMessageDialog(null, "Password or username do not match");
-                }
+                } else
+                    showMessageDialog(null, "Login Name or Password do not match");
 
             }
+        });
 
-        }
-
-        );
     }
-
 }
