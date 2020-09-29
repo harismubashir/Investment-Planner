@@ -10,25 +10,24 @@ import java.awt.event.ActionEvent;
 
 public class CreateEdit {
 
-    public CreateEdit(Mode mode) {
-        createEditPlan(mode);
-    }
-
-    public void createEditPlan(Mode mode) {
+    public void show(Mode mode, String planName) {
 
         JFrame createForm = new JFrame();
 
         JLabel createLabel = new JLabel((mode == Mode.CREATING) ? "Create Plan" : "Edit Plan");
+
+        Plan plan = new Plan();
+        String[] planData = plan.planData(planName);
 
         JLabel namePlanLabel = new JLabel("Plan Number");
         JLabel totalFundsLabel = new JLabel("Total funds lump sum");
         JLabel recurringContributionLabel = new JLabel("Recurring contribution");
         JLabel riskToleranceLabel = new JLabel("Risk Tolerance");
 
-        JTextField namePlanTextField = new JTextField("Plan No", 30);
-        JTextField totalFundsTextField = new JTextField("$", 30);
-        JTextField recurringContributionTextFied = new JTextField("$", 30);
-        JTextField riskToleranceTextField = new JTextField("5", 30);
+        JTextField namePlanTextField = new JTextField(planData[0], 30);
+        JTextField totalFundsTextField = new JTextField(planData[3], 30);
+        JTextField recurringContributionTextFied = new JTextField(planData[4], 30);
+        JTextField riskToleranceTextField = new JTextField(planData[5], 30);
 
         JButton selectInvestmentButton = new JButton("Select Investment");
 
@@ -64,11 +63,9 @@ public class CreateEdit {
 
         selectInvestmentButton.addActionListener(new ActionListener() {
 
-            public Pick pickInvestment = new Pick();
+            public Ticker pickInvestment = new Ticker();
 
             public void actionPerformed(ActionEvent e) {
-
-                selectInvestmentButton.setText("SI pressed");
 
                 if (mode == Mode.CREATING) {
 

@@ -21,7 +21,7 @@ public class Menu {
         JButton reviewButton = new JButton("Review Performance");
         JButton closeButton = new JButton("Close");
 
-        list.setBounds(100, 20, 200, 40);
+        list.setBounds(80, 20, 200, 40);
 
         createButton.setBounds(75, 80, 200, 40);
         editButton.setBounds(75, 140, 200, 40);
@@ -40,17 +40,16 @@ public class Menu {
 
         createButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                CreateEdit c = new CreateEdit(Mode.CREATING);
-                c.createEditPlan(Mode.CREATING);
+                CreateEdit c = new CreateEdit();
+                c.show(Mode.CREATING, menuName);
             }
 
         });
 
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CreateEdit c = new CreateEdit(Mode.EDITING);
-                c.createEditPlan(Mode.EDITING);
+                CreateEdit c = new CreateEdit();
+                c.show(Mode.EDITING, menuName);
             }
 
         });

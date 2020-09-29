@@ -48,13 +48,14 @@ public class Login {
                 FileReadWrite read = new FileReadWrite();
 
                 String[] credentials = read.readWrite(Mode.READ, inputData);
-                System.out.println(credentials.toString());
+                // System.out.println(credentials.toString());
 
                 // TODO: check the username pass
                 if (credentials[0].equals(name) && credentials[1].equals(password)) {
                     new Menu(nameTextField.getText());
-                } else
+                } else {
                     showMessageDialog(null, "Login Name or Password do not match");
+                }
 
             }
         });

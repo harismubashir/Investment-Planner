@@ -5,10 +5,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.google.gson.JsonElement;
+
+import com.google.gson.JsonParser;
+
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
+
 import java.awt.event.ActionListener;
+
 import java.awt.event.ActionEvent;
 
-public class Pick {
+public class Ticker {
 
     public void show(Mode mode) {
 
@@ -42,6 +50,24 @@ public class Pick {
         }
 
         );
+
+    }
+
+    public String[] stockInfo(String ticker) {
+
+        String[] stockData = new String[4];
+
+        final String stockApi = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo";
+        final HttpResponse<String> httpResponse = Unirest.get(stockApi).asString();
+        JsonElement e = JsonParser.parseString(httpResponse.getBody());
+
+        // System.out.println(e);
+        String symbol = e.getAsJsonObject().get("Meta Data").getAsJsonObject().get("2. Symbol").getAsString();
+        System.out.println(symbol);
+        final Login loginForm = new Login();
+        loginForm.show();
+
+        return stockData;
 
     }
 

@@ -10,12 +10,12 @@ import java.io.Writer;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class FileReadWrite {
-    public String[] readWrite(Mode mode, String dataWrite[]) {
+    public String[] readWrite(Mode mode, String dataReference[]) {
 
         String filePath = "C:\\Users\\Haris\\Desktop\\test.txt";
         BufferedReader readerData;
         String fileReadData;
-        String loginData[] = { "", "" };
+        String returnData[] = { "", "" };
 
         int readCount = 0;
 
@@ -23,14 +23,15 @@ public class FileReadWrite {
             try {
                 readerData = new BufferedReader(new FileReader(new File(filePath)));
                 while ((fileReadData = readerData.readLine()) != null) {
-                    // System.out.println(fileReadData);
-
+                    // Else if used to limit array limit to first two file lines only
                     if (readCount == 0) {
-                        loginData[0] = fileReadData;
-
-                    } else {
-                        loginData[1] = fileReadData;
+                        returnData[0] = fileReadData;
+                    } else if (readCount == 1) {
+                        returnData[1] = fileReadData;
                     }
+                    /*
+                     * loginData[readCount] = fileReadData;
+                     */
                     readCount++;
 
                 }
@@ -42,7 +43,7 @@ public class FileReadWrite {
             }
 
             // TODO: return the data and let Login page do the comparison
-
+            return returnData;
         }
 
         if (mode == Mode.WRITE) {
@@ -50,12 +51,14 @@ public class FileReadWrite {
             int i = 0;
             try {
                 Writer output = new FileWriter("investmentplan.txt");
-                while (i != dataWrite.length) {
-                    output.write(dataWrite[i]);
+                while (i != dataReference.length) {
+                    output.write(dataReference[i]);
                     i++;
                 }
 
                 output.close();
+                returnData[0] = "ok";
+
             }
 
             catch (Exception e) {
@@ -64,6 +67,6 @@ public class FileReadWrite {
 
         }
 
-        return loginData;
+        return returnData;
     }
 }
