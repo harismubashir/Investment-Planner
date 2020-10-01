@@ -15,27 +15,11 @@ import java.text.SimpleDateFormat;
  * 
  */
 public class Plan {
+    public String name = "Haris";
+    public Double totalFunds = 20000.0;
+    public Double recurringContribution = 1000.0;
+    public int riskTolerance = 5;
+    public Date dateObj = new Date();
 
-    public String[] planData(String planName) {
-
-        String[] data = new String[6];
-
-        data[0] = planName;
-        data[1] = "20000";
-        data[2] = "1000";
-        data[3] = "5";
-
-        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-        Date dateObj = new Date();
-
-        data[4] = df.format(dateObj.toString());
-
-        FileReadWrite read = new FileReadWrite();
-
-        String[] writeOk = read.readWrite(Mode.WRITE, data);
-        data[5] = writeOk[0];
-
-        return data;
-    }
 
 }

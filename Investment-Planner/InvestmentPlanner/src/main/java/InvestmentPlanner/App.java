@@ -1,5 +1,7 @@
 package InvestmentPlanner;
 
+import java.util.ArrayList;
+
 //import com.google.gson.JsonElement;
 
 //import com.google.gson.JsonObject;
@@ -23,6 +25,9 @@ public final class App {
      */
     public static void main(final String[] args) {
 
+        Database.plans = new ArrayList<Plan>();
+        // planList.add(plan1);
+        // planList.get(0);
         /*
          * final String stockApi =
          * "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo";

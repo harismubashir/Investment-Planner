@@ -16,18 +16,18 @@ public class CreateEdit {
 
         JLabel createLabel = new JLabel((mode == Mode.CREATING) ? "Create Plan" : "Edit Plan");
 
-        Plan plan = new Plan();
-        String[] planData = plan.planData(planName);
+        Plan plan1 = new Plan();
+        Database.plans.add(plan1);
 
         JLabel namePlanLabel = new JLabel("Plan Number");
         JLabel totalFundsLabel = new JLabel("Total funds lump sum");
         JLabel recurringContributionLabel = new JLabel("Recurring contribution");
         JLabel riskToleranceLabel = new JLabel("Risk Tolerance");
 
-        JTextField namePlanTextField = new JTextField(planData[0], 30);
-        JTextField totalFundsTextField = new JTextField(planData[3], 30);
-        JTextField recurringContributionTextFied = new JTextField(planData[4], 30);
-        JTextField riskToleranceTextField = new JTextField(planData[5], 30);
+        JTextField namePlanTextField = new JTextField(plan1.name, 30);
+        JTextField totalFundsTextField = new JTextField(plan1.totalFunds.toString(), 30);
+        JTextField recurringContributionTextFied = new JTextField(plan1.recurringContribution.toString(), 30);
+        JTextField riskToleranceTextField = new JTextField(Integer.toString(plan1.riskTolerance), 30);
 
         JButton selectInvestmentButton = new JButton("Select Investment");
 
