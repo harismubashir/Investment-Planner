@@ -18,6 +18,7 @@ public class CreateEdit {
 
         Plan plan1 = new Plan();
         Database.plans.add(plan1);
+        System.out.println(plan1.dateObj);
 
         JLabel namePlanLabel = new JLabel("Plan Number");
         JLabel totalFundsLabel = new JLabel("Total funds lump sum");

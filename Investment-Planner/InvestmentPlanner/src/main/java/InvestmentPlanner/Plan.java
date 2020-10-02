@@ -1,8 +1,6 @@
 package InvestmentPlanner;
 
 import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 /**
  * Accepts planName as a string which is the the name entered by user Returns
