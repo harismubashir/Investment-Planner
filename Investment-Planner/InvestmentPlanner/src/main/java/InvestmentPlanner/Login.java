@@ -7,6 +7,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Login {
@@ -19,7 +23,20 @@ public class Login {
         JLabel passwordLabel = new JLabel("Password");
 
         JTextField nameTextField = new JTextField("Name", 30);
+        nameTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                nameTextField.setText("");
+            }
+        });
+
         JPasswordField passwordTextField = new JPasswordField("*******", 30);
+        passwordTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                passwordTextField.setText("");
+            }
+        });
 
         loginButton.setBounds(75, 150, 100, 40);
         nameLabel.setBounds(50, 25, 100, 40);

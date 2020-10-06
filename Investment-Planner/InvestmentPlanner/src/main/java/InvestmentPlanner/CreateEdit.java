@@ -70,7 +70,7 @@ public class CreateEdit {
 
                 if (mode == Mode.CREATING) {
 
-                    pickInvestment.show(Mode.CREATING);
+                    pickInvestment.show(Mode.CREATING, plan1);
 
                 } else {
                     // JFrame pickInvestment = new JFrame();
