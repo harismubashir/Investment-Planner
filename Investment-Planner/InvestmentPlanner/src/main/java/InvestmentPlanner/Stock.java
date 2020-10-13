@@ -1,9 +1,11 @@
 package InvestmentPlanner;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 /**
- * Accepts planName as a string which is the the name entered by user Returns
+ * Stores stockName (String), ticker (String), noOfStocks (int), purchasePrice (double)
+ * date (Date) e.g. Tue Oct 06 17:09:21 NDT 2020
  * details of the plan in String in the following order [0] Name of plan [1]
  * Total funds in plan (currency with upto 2 decimal places) [2] Recurring
  * Contribution (currency with upto two decimal places) [3] Risk tolerance
@@ -12,15 +14,12 @@ import java.util.Date;
  * @param string[]
  * 
  */
-public class Plan {
+public class Stock {
 
-
-
-    public String name = "Haris";
-    public Double totalFunds = 20000.0;
-    public Double recurringContribution = 1000.0;
-    public int riskTolerance = 5;
-    public Date dateObj = new Date();
-
+    public String stockName;
+    public String ticker;
+    public int noOfStocks;
+    public double purchasePrice;
+    public Date purchaseDateTime;
 
 }

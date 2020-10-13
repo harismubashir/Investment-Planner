@@ -26,6 +26,7 @@ public final class App {
     public static void main(final String[] args) {
 
         Database.plans = new ArrayList<Plan>();
+        Database.stocks = new ArrayList<Stock>();
 
         final Login loginForm = new Login();
         loginForm.show();

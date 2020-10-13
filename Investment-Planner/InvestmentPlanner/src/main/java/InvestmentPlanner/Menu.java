@@ -3,6 +3,8 @@ package InvestmentPlanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -20,17 +22,20 @@ public class Menu {
         JButton editButton = new JButton("Edit Portfolio");
         JButton reviewButton = new JButton("Review Performance");
         JButton closeButton = new JButton("Close");
+        JTextField editPlanNoTextfield = new JTextField("Enter Plan # to Edit", 40);
 
         list.setBounds(80, 20, 200, 40);
 
         createButton.setBounds(75, 80, 200, 40);
         editButton.setBounds(75, 140, 200, 40);
+        editPlanNoTextfield.setBounds(275, 140, 200, 40);
         reviewButton.setBounds(75, 200, 200, 40);
         closeButton.setBounds(110, 260, 100, 40);
 
         menuForm.add(list);
         menuForm.add(createButton);
         menuForm.add(editButton);
+        menuForm.add(editPlanNoTextfield);
         menuForm.add(reviewButton);
         menuForm.add(closeButton);
 
@@ -49,7 +54,8 @@ public class Menu {
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CreateEdit c = new CreateEdit();
-                c.show(Mode.EDITING, menuName);
+                c.show(Mode.EDITING, editPlanNoTextfield.getText());
+
             }
 
         });
