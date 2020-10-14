@@ -15,31 +15,29 @@ public class CreateEdit {
 
         JFrame createForm = new JFrame();
 
+        Plan newPlan;
         if (mode == Mode.CREATING) {
             reference = Database.plans.size() + 1;
-
+            newPlan = new Plan();
         } else {
             reference = Integer.parseInt(planNo);
+            newPlan = Database.plans.get(1);
         }
 
         JLabel createLabel = new JLabel((mode == Mode.CREATING) ? "Create Plan" : "Edit Plan");
 
-        // Plan plan1[] = new Plan[reference];
-
-        Plan plan2 = new Plan();
-
-        // Database.plans.add(plan2);
+        
 
         JLabel namePlanLabel = new JLabel("Plan Number");
         JLabel totalFundsLabel = new JLabel("Total funds lump sum");
         JLabel recurringContributionLabel = new JLabel("Recurring contribution");
         JLabel riskToleranceLabel = new JLabel("Risk Tolerance");
 
-        JTextField namePlanTextField = new JTextField(plan2.name, 30);
+        JTextField namePlanTextField = new JTextField(newPlan.name, 30);
         JTextField planNoTextField = new JTextField("Enter plan number", 30);
-        JTextField totalFundsTextField = new JTextField(plan2.totalFunds.toString(), 30);
-        JTextField recurringContributionTextFied = new JTextField(plan2.recurringContribution.toString(), 30);
-        JTextField riskToleranceTextField = new JTextField(Integer.toString(plan2.riskTolerance), 30);
+        JTextField totalFundsTextField = new JTextField(newPlan.totalFunds.toString(), 30);
+        JTextField recurringContributionTextFied = new JTextField(newPlan.recurringContribution.toString(), 30);
+        JTextField riskToleranceTextField = new JTextField(Integer.toString(newPlan.riskTolerance), 30);
 
         JButton selectInvestmentButton = new JButton("Select Investment");
 
@@ -84,7 +82,7 @@ public class CreateEdit {
 
                 if (mode == Mode.CREATING) {
 
-                    pickInvestment.show(Mode.CREATING, plan2);
+                    pickInvestment.show(Mode.CREATING, newPlan);
 
                 } else {
                     // JFrame pickInvestment = new JFrame();
@@ -94,6 +92,12 @@ public class CreateEdit {
             }
 
         });
+
+        // when the save button is clicked:
+        //      - save the changed text boxes to the plan
+        //      - add the plan to the db
+
+        Database.plans.add(newPlan);
 
     }
 
