@@ -1,5 +1,6 @@
 package InvestmentPlanner;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -20,8 +21,7 @@ public class Plan {
     public Double recurringContribution = 1000.0;
     public int riskTolerance = 5;
     public Date dateObj = new Date();
-    public Stock[] stocks;
+    public ArrayList<Stock> stocks = new ArrayList<Stock>();
     public String[] bufferedStockData;
-
 
 }

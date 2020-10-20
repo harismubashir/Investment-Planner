@@ -41,6 +41,13 @@ public class CreateEdit {
         JButton selectInvestmentButton = new JButton("Select Investment");
         JButton saveButton = new JButton("Save");
 
+        JTextField planDetails = new JTextField();
+        String planDetailsText = "";
+        for (int i = 0; i < newPlan.stocks.size(); i++) {
+            planDetailsText += newPlan.stocks.get(i).ticker + "\n";
+        }
+        planDetails.setText(planDetailsText);
+
         createLabel.setBounds(100, 20, 120, 40);
 
         namePlanLabel.setBounds(75, 80, 200, 40);

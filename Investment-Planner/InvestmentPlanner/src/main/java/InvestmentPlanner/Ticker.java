@@ -76,7 +76,6 @@ public class Ticker {
                 plan.totalFunds = plan.totalFunds
                         + Double.parseDouble(tickerSearchResult[1]) * Double.parseDouble(noOfStocksTextField.getText());
 
-
             }
 
         }
@@ -85,10 +84,10 @@ public class Ticker {
 
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
-               // plan.stocks = stockData[0];
-               // plan.stocks.purchasePrice = stockData[1];
-               // plan.stocks.purchaseDateTime = stockData[2];
+                Stock stock = new Stock();
+                stock.stockName = stockData[0];
+                stock.purchasePrice = Double.valueOf(stockData[1]);
+                stock.purchaseDateTime = stockData[2];
 
             }
 
@@ -116,7 +115,7 @@ public class Ticker {
         String lastRefereshedTime = e2.getAsJsonObject().get("Meta Data").getAsJsonObject().get("3. Last Refreshed")
                 .getAsString();
         String price = e2.getAsJsonObject().get("Time Series (5min)").getAsJsonObject().get(lastRefereshedTime)
-                .getAsJsonObject().get("05. price").getAsString();
+                .getAsJsonObject().get("4. close").getAsString();
         System.out.println(symbol);
         System.out.println(lastRefereshedTime);
         System.out.println(price);
