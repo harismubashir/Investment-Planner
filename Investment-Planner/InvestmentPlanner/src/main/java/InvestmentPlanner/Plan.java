@@ -20,5 +20,8 @@ public class Plan {
     public Double recurringContribution = 1000.0;
     public int riskTolerance = 5;
     public Date dateObj = new Date();
+    public Stock[] stocks;
+    public String[] bufferedStockData;
+
 
 }
