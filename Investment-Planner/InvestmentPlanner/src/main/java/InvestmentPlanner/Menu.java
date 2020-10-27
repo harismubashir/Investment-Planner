@@ -8,6 +8,8 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 public class Menu {
     public Menu(String name) {
         setupGUI(name);
@@ -53,8 +55,13 @@ public class Menu {
 
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CreateEdit c = new CreateEdit();
-                c.show(Mode.EDITING, editPlanNoTextfield.getText());
+
+                if (Integer.valueOf(editPlanNoTextfield.getText()) <= Database.plans.size()) {
+                    CreateEdit c = new CreateEdit();
+                    c.show(Mode.EDITING, editPlanNoTextfield.getText());
+                } else {
+                    showMessageDialog(null, "Plan No does not match");
+                }
 
             }
 

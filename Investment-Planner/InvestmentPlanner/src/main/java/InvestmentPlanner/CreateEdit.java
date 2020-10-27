@@ -94,8 +94,7 @@ public class CreateEdit {
                     pickInvestment.show(Mode.CREATING, newPlan);
 
                 } else {
-                    // JFrame pickInvestment = new JFrame();
-                    // pickInvestment.show(Mode.EDITING);
+                    pickInvestment.show(Mode.EDITING, newPlan);
 
                 }
             }

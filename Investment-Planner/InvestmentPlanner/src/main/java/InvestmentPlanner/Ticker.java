@@ -65,6 +65,11 @@ public class Ticker {
         pickForm.setLayout(null);
         pickForm.setVisible(true);
 
+        if(mode == Mode.EDITING){
+
+            for(i= plan.)
+        }
+
         addDeleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -75,6 +80,9 @@ public class Ticker {
                 pickForm.add(stockTextField);
                 plan.totalFunds = plan.totalFunds
                         + Double.parseDouble(tickerSearchResult[1]) * Double.parseDouble(noOfStocksTextField.getText());
+
+
+
 
             }
 
