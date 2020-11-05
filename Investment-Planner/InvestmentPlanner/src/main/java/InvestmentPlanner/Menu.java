@@ -30,7 +30,7 @@ public class Menu {
 
         createButton.setBounds(75, 80, 200, 40);
         editButton.setBounds(75, 140, 200, 40);
-        editPlanNoTextfield.setBounds(275, 140, 200, 40);
+        editPlanNoTextfield.setBounds(275, 140, 50, 40);
         reviewButton.setBounds(75, 200, 200, 40);
         closeButton.setBounds(110, 260, 100, 40);
 
@@ -48,7 +48,11 @@ public class Menu {
         createButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CreateEdit c = new CreateEdit();
-                c.show(Mode.CREATING, menuName);
+                try {
+                    c.show(Mode.CREATING, null);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
 
         });
@@ -58,7 +62,13 @@ public class Menu {
 
                 if (Integer.valueOf(editPlanNoTextfield.getText()) <= Database.plans.size()) {
                     CreateEdit c = new CreateEdit();
-                    c.show(Mode.EDITING, editPlanNoTextfield.getText());
+                    try {
+
+                        c.show(Mode.EDITING, Database.getPlanByNumber(editPlanNoTextfield.getText()));
+                    } catch (Exception e1) {
+                        // TODO show error to user
+                        showMessageDialog(null, "Plan not found, please enter correct no.");
+                    }
                 } else {
                     showMessageDialog(null, "Plan No does not match");
                 }

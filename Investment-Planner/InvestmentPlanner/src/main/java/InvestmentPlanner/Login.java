@@ -22,7 +22,7 @@ public class Login {
         JLabel nameLabel = new JLabel("Name");
         JLabel passwordLabel = new JLabel("Password");
 
-        JTextField nameTextField = new JTextField("Name", 30);
+        JTextField nameTextField = new JTextField("Haris", 30);
         nameTextField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -30,7 +30,7 @@ public class Login {
             }
         });
 
-        JPasswordField passwordTextField = new JPasswordField("*******", 30);
+        JPasswordField passwordTextField = new JPasswordField("Test123", 30);
         passwordTextField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

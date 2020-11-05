@@ -9,9 +9,6 @@ import com.google.gson.JsonElement;
 
 import com.google.gson.JsonParser;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
@@ -28,7 +25,7 @@ public class Ticker {
         JFrame pickForm = new JFrame();
         int rowHeight = 200;
 
-        JButton addDeleteButton = new JButton((mode == Mode.CREATING) ? "Add" : "Delete");
+        JButton showButton = new JButton((mode == Mode.CREATING) ? "Add" : "Delete");
         JLabel tickerLabel = new JLabel("Stock Name");
         JTextField tickerTextField = new JTextField("Stock Ticker", 30);
 
@@ -36,17 +33,12 @@ public class Ticker {
 
         JLabel noOfStocksLabel = new JLabel("No of Stocks");
         JTextField noOfStocksTextField = new JTextField("", 30);
-        noOfStocksTextField.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                tickerTextField.setText("");
-            }
-        });
 
-        addDeleteButton.setBounds(75, 150, 100, 40);
-        saveButton.setBounds(150, 150, 100, 40);
+        showButton.setBounds(75, 150, 100, 40);
+        showButton.setBounds(150, 150, 100, 40);
         tickerLabel.setBounds(50, 25, 100, 40);
         tickerTextField.setBounds(150, 25, 100, 40);
+        saveButton.setBounds(150, 200, 100, 30);
 
         noOfStocksLabel.setBounds(50, 75, 100, 40);
         noOfStocksTextField.setBounds(150, 75, 100, 40);
@@ -59,18 +51,35 @@ public class Ticker {
         pickForm.add(noOfStocksLabel);
         pickForm.add(noOfStocksTextField);
 
-        pickForm.add(addDeleteButton);
+        pickForm.add(showButton);
+
+        pickForm.add(saveButton);
 
         pickForm.setSize(400, 500);
         pickForm.setLayout(null);
-        pickForm.setVisible(true);
 
-        if(mode == Mode.EDITING){
+        JTextField stocksNameTextField[] = new JTextField[20];
+        ;
+        JTextField stocksNoTextField[] = new JTextField[20];
 
-            for(i= plan.)
+        if (mode == Mode.EDITING) {
+            for (int i = 0; i < plan.stocks.size(); i++) {
+
+                stocksNameTextField[i] = new JTextField(plan.stocks.get(i).stockName, 30);
+                stocksNoTextField[i] = new JTextField(String.valueOf(plan.stocks.get(i).purchasePrice), 30);
+
+                stocksNameTextField[i].setBounds(75, rowHeight+150, 50, 40);
+                stocksNoTextField[i].setBounds(150, rowHeight+150, 50, 40);
+
+                pickForm.add(stocksNameTextField[i]);
+                pickForm.add(stocksNoTextField[i]);
+
+            }
         }
 
-        addDeleteButton.addActionListener(new ActionListener() {
+        pickForm.setVisible(true);
+
+        showButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 final String[] tickerSearchResult = stockInfo(tickerTextField.getText());
@@ -80,9 +89,6 @@ public class Ticker {
                 pickForm.add(stockTextField);
                 plan.totalFunds = plan.totalFunds
                         + Double.parseDouble(tickerSearchResult[1]) * Double.parseDouble(noOfStocksTextField.getText());
-
-
-
 
             }
 
@@ -97,6 +103,11 @@ public class Ticker {
                 stock.purchasePrice = Double.valueOf(stockData[1]);
                 stock.purchaseDateTime = stockData[2];
 
+                if (mode == Mode.CREATING) {
+                    plan.stocks.add(stock);
+                } else {
+                    plan.stocks.add(Integer.valueOf(plan.planNo), stock);
+                }
             }
 
         }

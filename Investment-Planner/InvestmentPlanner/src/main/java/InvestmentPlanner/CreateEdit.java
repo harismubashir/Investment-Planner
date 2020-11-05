@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 public class CreateEdit {
     public int arrayIndex;
 
-    public void show(Mode mode, String planNo) {
+    public void show(Mode mode, Plan plan) throws Exception {
 
         JFrame createForm = new JFrame();
 
@@ -21,8 +21,7 @@ public class CreateEdit {
             arrayIndex = Database.plans.size() + 1;
             newPlan = new Plan();
         } else {
-            arrayIndex = Integer.parseInt(planNo);
-            newPlan = Database.plans.get(arrayIndex);
+            newPlan = plan;
         }
 
         JLabel createLabel = new JLabel((mode == Mode.CREATING) ? "Create Plan" : "Edit Plan");
@@ -32,8 +31,8 @@ public class CreateEdit {
         JLabel recurringContributionLabel = new JLabel("Recurring contribution");
         JLabel riskToleranceLabel = new JLabel("Risk Tolerance");
 
-        JTextField namePlanTextField = new JTextField(newPlan.name, 30);
-        JTextField planNoTextField = new JTextField(String.valueOf(arrayIndex), 30);
+        JLabel namePlanLabelDetails = new JLabel("for " + newPlan.name);
+        JTextField planNoTextField = new JTextField(newPlan.planNo, 30);
         JTextField totalFundsTextField = new JTextField(newPlan.totalFunds.toString(), 30);
         JTextField recurringContributionTextFied = new JTextField(newPlan.recurringContribution.toString(), 30);
         JTextField riskToleranceTextField = new JTextField(Integer.toString(newPlan.riskTolerance), 30);
@@ -45,8 +44,8 @@ public class CreateEdit {
         String planDetailsText = "";
         for (int i = 0; i < newPlan.stocks.size(); i++) {
             planDetailsText += newPlan.stocks.get(i).ticker + "\n";
+            planDetails.setText(planDetailsText);
         }
-        planDetails.setText(planDetailsText);
 
         createLabel.setBounds(100, 20, 120, 40);
 
@@ -58,8 +57,7 @@ public class CreateEdit {
         saveButton.setBounds(110, 400, 100, 40);
 
         planNoTextField.setBounds(275, 80, 200, 40);
-        namePlanTextField.disable();
-        namePlanTextField.setBounds(170, 10, 200, 40);
+        namePlanLabelDetails.setBounds(170, 20, 200, 40);
         totalFundsTextField.setBounds(275, 140, 200, 40);
         recurringContributionTextFied.setBounds(275, 200, 200, 40);
         riskToleranceTextField.setBounds(275, 260, 200, 40);
@@ -73,7 +71,7 @@ public class CreateEdit {
         createForm.add(selectInvestmentButton);
         createForm.add(saveButton);
 
-        createForm.add(namePlanTextField);
+        createForm.add(namePlanLabelDetails);
         createForm.add(planNoTextField);
         createForm.add(totalFundsTextField);
         createForm.add(recurringContributionTextFied);
