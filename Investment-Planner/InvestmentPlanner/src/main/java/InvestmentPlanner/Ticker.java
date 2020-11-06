@@ -3,7 +3,10 @@ package InvestmentPlanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JList;
 
 import com.google.gson.JsonElement;
 
@@ -58,24 +61,40 @@ public class Ticker {
         pickForm.setSize(400, 500);
         pickForm.setLayout(null);
 
-        JTextField stocksNameTextField[] = new JTextField[20];
-        ;
-        JTextField stocksNoTextField[] = new JTextField[20];
 
-        if (mode == Mode.EDITING) {
-            for (int i = 0; i < plan.stocks.size(); i++) {
 
-                stocksNameTextField[i] = new JTextField(plan.stocks.get(i).stockName, 30);
-                stocksNoTextField[i] = new JTextField(String.valueOf(plan.stocks.get(i).purchasePrice), 30);
 
-                stocksNameTextField[i].setBounds(75, rowHeight+150, 50, 40);
-                stocksNoTextField[i].setBounds(150, rowHeight+150, 50, 40);
+        final JTable stocksTable;
+        String[] columnNames = { "Stock", "Price", "Date" };
 
-                pickForm.add(stocksNameTextField[i]);
-                pickForm.add(stocksNoTextField[i]);
+        //JList stocksList;
+        // JList stocksList = new JList(columnNames);
+    
 
-            }
-        }
+        stocksTable = new JTable(plan, columnNames);
+        stocksTable.setBounds(30, 40, 200, 300);
+
+        pickForm.add(stocksTable);
+
+        // JTextField stocksNameTextField[] = new JTextField[20];
+
+        // JTextField stocksNoTextField[] = new JTextField[20];
+
+        // if (mode == Mode.EDITING) {
+        // for (int i = 0; i < plan.stocks.size(); i++) {
+
+        // stocksNameTextField[i] = new JTextField(plan.stocks.get(i).stockName, 30);
+        // stocksNoTextField[i] = new
+        // JTextField(String.valueOf(plan.stocks.get(i).purchasePrice), 30);
+
+        // stocksNameTextField[i].setBounds(75, rowHeight+150, 50, 40);
+        // stocksNoTextField[i].setBounds(150, rowHeight+150, 50, 40);
+
+        // pickForm.add(stocksNameTextField[i]);
+        // pickForm.add(stocksNoTextField[i]);
+
+        // }
+        // }
 
         pickForm.setVisible(true);
 
@@ -144,6 +163,10 @@ public class Ticker {
         stockData[2] = lastRefereshedTime;
 
         return stockData;
+
+    }
+
+    public void showList(Plan planList) {
 
     }
 
