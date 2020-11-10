@@ -64,17 +64,17 @@ public class Ticker {
 
 
 
-        final JTable stocksTable;
+        //final JTable stocksTable;
         String[] columnNames = { "Stock", "Price", "Date" };
 
-        //JList stocksList;
-        // JList stocksList = new JList(columnNames);
+        JList<String> stocksList;
+        stocksList = new JList<String>(columnNames);
     
 
-        stocksTable = new JTable(plan, columnNames);
-        stocksTable.setBounds(30, 40, 200, 300);
+        //stocksTable = new JTable(plan, columnNames);
+        stocksList.setBounds(30, 40, 200, 300);
 
-        pickForm.add(stocksTable);
+        pickForm.add(stocksList);
 
         // JTextField stocksNameTextField[] = new JTextField[20];
 
