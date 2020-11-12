@@ -3,10 +3,8 @@ package InvestmentPlanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JList;
 
 import com.google.gson.JsonElement;
 
@@ -18,6 +16,7 @@ import kong.unirest.Unirest;
 import java.awt.event.ActionListener;
 
 import java.awt.event.ActionEvent;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Ticker {
 
@@ -28,11 +27,11 @@ public class Ticker {
         JFrame pickForm = new JFrame();
         int rowHeight = 200;
 
-        JButton showButton = new JButton((mode == Mode.CREATING) ? "Add" : "Delete");
+        JButton saveButton = new JButton((mode == Mode.CREATING) ? "Add" : "Delete");
         JLabel tickerLabel = new JLabel("Stock Name");
         JTextField tickerTextField = new JTextField("Stock Ticker", 30);
 
-        JButton saveButton = new JButton("Save");
+        JButton showButton = new JButton("Search");
 
         JLabel noOfStocksLabel = new JLabel("No of Stocks");
         JTextField noOfStocksTextField = new JTextField("", 30);
@@ -61,54 +60,42 @@ public class Ticker {
         pickForm.setSize(400, 500);
         pickForm.setLayout(null);
 
-
-
-
-        //final JTable stocksTable;
         String[] columnNames = { "Stock", "Price", "Date" };
+        String[][] stocksListData = new String[plan.stocks.size()][3];
 
-        JList<String> stocksList;
-        stocksList = new JList<String>(columnNames);
-    
+        if (mode == Mode.EDITING) {
+            for (int i = 0; i < plan.stocks.size(); i++) {
 
-        //stocksTable = new JTable(plan, columnNames);
-        stocksList.setBounds(30, 40, 200, 300);
+                stocksListData[i][0] = plan.stocks.get(i).stockName;
+                stocksListData[i][1] = String.valueOf(plan.stocks.get(i).purchasePrice);
+                stocksListData[i][2] = plan.stocks.get(i).purchaseDateTime;
+            }
 
-        pickForm.add(stocksList);
+            JTable stocksTable;
+            stocksTable = new JTable(stocksListData, columnNames);
+            stocksTable.setBounds(50, 250, 300, 30);
+            pickForm.add(stocksTable);
 
-        // JTextField stocksNameTextField[] = new JTextField[20];
-
-        // JTextField stocksNoTextField[] = new JTextField[20];
-
-        // if (mode == Mode.EDITING) {
-        // for (int i = 0; i < plan.stocks.size(); i++) {
-
-        // stocksNameTextField[i] = new JTextField(plan.stocks.get(i).stockName, 30);
-        // stocksNoTextField[i] = new
-        // JTextField(String.valueOf(plan.stocks.get(i).purchasePrice), 30);
-
-        // stocksNameTextField[i].setBounds(75, rowHeight+150, 50, 40);
-        // stocksNoTextField[i].setBounds(150, rowHeight+150, 50, 40);
-
-        // pickForm.add(stocksNameTextField[i]);
-        // pickForm.add(stocksNoTextField[i]);
-
-        // }
-        // }
+        }
 
         pickForm.setVisible(true);
 
         showButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                final String[] tickerSearchResult = stockInfo(tickerTextField.getText());
+                try {
+                    final String[] tickerSearchResult = stockInfo(tickerTextField.getText());
 
-                JTextField stockTextField = new JTextField(tickerSearchResult[0] + "  " + tickerSearchResult[1], 30);
-                stockTextField.setBounds(150, rowHeight + 40, 100, 40);
-                pickForm.add(stockTextField);
-                plan.totalFunds = plan.totalFunds
-                        + Double.parseDouble(tickerSearchResult[1]) * Double.parseDouble(noOfStocksTextField.getText());
+                    JTextField stockTextField = new JTextField(tickerSearchResult[0] + "  " + tickerSearchResult[1],
+                            30);
+                    stockTextField.setBounds(150, rowHeight + 40, 100, 40);
+                    pickForm.add(stockTextField);
+                    plan.totalFunds = plan.totalFunds + Double.parseDouble(tickerSearchResult[1])
+                            * Double.parseDouble(noOfStocksTextField.getText());
 
+                } catch (Exception ex) {
+                    showMessageDialog(null, ex);
+                }
             }
 
         }
@@ -135,7 +122,7 @@ public class Ticker {
 
     }
 
-    public String[] stockInfo(String ticker) {
+    public String[] stockInfo(String ticker) throws Exception {
 
         final String stockApi = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + ticker
                 + "&interval=5min&apikey=XIME2HD6DHN7WPYZ";
@@ -150,6 +137,9 @@ public class Ticker {
 
         // System.out.println(e);
         String symbol = e.getAsJsonObject().get("Meta Data").getAsJsonObject().get("2. Symbol").getAsString();
+        if (httpResponse2.getBody().contains("Thank you for using Alpha Vantage!")) {
+            throw new Exception("Please wait 1 minute");
+        }
         String lastRefereshedTime = e2.getAsJsonObject().get("Meta Data").getAsJsonObject().get("3. Last Refreshed")
                 .getAsString();
         String price = e2.getAsJsonObject().get("Time Series (5min)").getAsJsonObject().get(lastRefereshedTime)
