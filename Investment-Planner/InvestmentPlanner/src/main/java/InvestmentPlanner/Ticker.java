@@ -1,10 +1,12 @@
 package InvestmentPlanner;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import com.google.gson.JsonElement;
 
@@ -60,21 +62,31 @@ public class Ticker {
         pickForm.setSize(400, 500);
         pickForm.setLayout(null);
 
+        final JComboBox<String> stockDropdown = new JComboBox<String>();
+
         String[] columnNames = { "Stock", "Price", "Date" };
         String[][] stocksListData = new String[plan.stocks.size()][3];
 
         if (mode == Mode.EDITING) {
             for (int i = 0; i < plan.stocks.size(); i++) {
-
+                stockDropdown.addItem(plan.stocks.get(i).stockName);
                 stocksListData[i][0] = plan.stocks.get(i).stockName;
                 stocksListData[i][1] = String.valueOf(plan.stocks.get(i).purchasePrice);
                 stocksListData[i][2] = plan.stocks.get(i).purchaseDateTime;
             }
 
+            stockDropdown.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    tickerTextField.setText("You Selected : " + (stockDropdown.getSelectedItem()));
+                }
+            });
             JTable stocksTable;
             stocksTable = new JTable(stocksListData, columnNames);
-            stocksTable.setBounds(50, 250, 300, 30);
+            stocksTable.setBounds(50, 250, 300, 20 * plan.stocks.size());
+            stockDropdown.setBounds(150, 25, 100, 40);
+            pickForm.remove(tickerTextField);
             pickForm.add(stocksTable);
+            pickForm.add(stockDropdown);
 
         }
 
