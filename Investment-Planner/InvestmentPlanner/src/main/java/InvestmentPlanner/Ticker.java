@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 import com.google.gson.JsonElement;
 
@@ -29,20 +28,20 @@ public class Ticker {
         JFrame pickForm = new JFrame();
         int rowHeight = 200;
 
-        JButton saveButton = new JButton((mode == Mode.CREATING) ? "Add" : "Delete");
+        JButton addDeleteButton = new JButton((mode == Mode.CREATING) ? "Add" : "Delete");
         JLabel tickerLabel = new JLabel("Stock Name");
         JTextField tickerTextField = new JTextField("Stock Ticker", 30);
 
-        JButton showButton = new JButton("Search");
+        JButton searchButton = new JButton("Search");
 
         JLabel noOfStocksLabel = new JLabel("No of Stocks");
         JTextField noOfStocksTextField = new JTextField("", 30);
 
-        showButton.setBounds(75, 150, 100, 40);
-        showButton.setBounds(150, 150, 100, 40);
+        searchButton.setBounds(75, 150, 100, 40);
+        searchButton.setBounds(150, 150, 100, 40);
         tickerLabel.setBounds(50, 25, 100, 40);
         tickerTextField.setBounds(150, 25, 100, 40);
-        saveButton.setBounds(150, 200, 100, 30);
+        addDeleteButton.setBounds(150, 200, 100, 30);
 
         noOfStocksLabel.setBounds(50, 75, 100, 40);
         noOfStocksTextField.setBounds(150, 75, 100, 40);
@@ -55,9 +54,9 @@ public class Ticker {
         pickForm.add(noOfStocksLabel);
         pickForm.add(noOfStocksTextField);
 
-        pickForm.add(showButton);
+        pickForm.add(searchButton);
 
-        pickForm.add(saveButton);
+        pickForm.add(addDeleteButton);
 
         pickForm.setSize(400, 500);
         pickForm.setLayout(null);
@@ -83,7 +82,7 @@ public class Ticker {
             JTable stocksTable;
             stocksTable = new JTable(stocksListData, columnNames);
             stocksTable.setBounds(50, 250, 300, 20 * plan.stocks.size());
-            stockDropdown.setBounds(150, 25, 100, 40);
+            stockDropdown.setBounds(150, 25, 100, 30);
             pickForm.remove(tickerTextField);
             pickForm.add(stocksTable);
             pickForm.add(stockDropdown);
@@ -92,11 +91,13 @@ public class Ticker {
 
         pickForm.setVisible(true);
 
-        showButton.addActionListener(new ActionListener() {
+        searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 try {
-                    final String[] tickerSearchResult = stockInfo(tickerTextField.getText());
+                    System.out.println(stockDropdown.getSelectedItem());
+                    final String[] tickerSearchResult = stockInfo((mode == Mode.CREATING) ? tickerTextField.getText()
+                            : String.valueOf(stockDropdown.getSelectedItem()));
 
                     JTextField stockTextField = new JTextField(tickerSearchResult[0] + "  " + tickerSearchResult[1],
                             30);
@@ -114,7 +115,7 @@ public class Ticker {
 
         );
 
-        saveButton.addActionListener(new ActionListener() {
+        addDeleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Stock stock = new Stock();
                 stock.stockName = stockData[0];
@@ -124,7 +125,7 @@ public class Ticker {
                 if (mode == Mode.CREATING) {
                     plan.stocks.add(stock);
                 } else {
-                    plan.stocks.add(Integer.valueOf(plan.planNo), stock);
+                    plan.stocks.add(Integer.valueOf(plan.planNo) + 1, stock);
                 }
             }
 
