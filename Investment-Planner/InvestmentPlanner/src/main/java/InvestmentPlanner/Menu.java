@@ -26,16 +26,16 @@ public class Menu {
         JButton reviewButton = new JButton("Review Performance");
         JButton closeButton = new JButton("Close");
         JTextField selectedPlanTextField = new JTextField();
-        JComboBox<String> editPlanNoComboBox = new JComboBox<String>();
+        JComboBox<Integer> editPlanNoComboBox = new JComboBox<Integer>();
 
-        for (int c = 0; c < 5; c++) {
-            editPlanNoComboBox.addItem(String.valueOf(c));
+        for (int c = 1; c < 5; c++) {
+            editPlanNoComboBox.addItem(c);
 
         }
 
         editPlanNoComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                selectedPlanTextField.setText("" + editPlanNoComboBox.getSelectedItem());
+                selectedPlanTextField.setText(String.valueOf(editPlanNoComboBox.getSelectedIndex()));
             }
         });
 
@@ -54,7 +54,7 @@ public class Menu {
         menuForm.add(editPlanNoComboBox);
         menuForm.add(reviewButton);
         menuForm.add(closeButton);
-        menuForm.add(selectedPlanTextField);
+        // menuForm.add(selectedPlanTextField);
 
         menuForm.setSize(800, 1000);
         menuForm.setLayout(null);
@@ -74,20 +74,19 @@ public class Menu {
 
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                if (Integer.valueOf(selectedPlanTextField.getText()) <= Database.plans.size()) {
-                    CreateEdit c = new CreateEdit();
-                    System.out.println(selectedPlanTextField.getText());
+                System.out.println(editPlanNoComboBox.getSelectedIndex() + "" + Database.plans.size());
+                if (editPlanNoComboBox.getSelectedIndex() <= Database.plans.size())
                     try {
 
+                        CreateEdit c = new CreateEdit();
                         c.show(Mode.EDITING,
-                                Database.getPlanByNumber(Integer.valueOf(selectedPlanTextField.getText()) - 1));
+                                Database.getPlanByNumber(Integer.valueOf(selectedPlanTextField.getText()) + 1));
                     } catch (Exception e1) {
                         // TODO show error to user
                         showMessageDialog(null, "Plan not found, please enter correct no.");
                     }
-                } else {
-                    showMessageDialog(null, "Plan No does not match");
+                else {
+                    showMessageDialog(null, "Plan No" + (selectedPlanTextField.getText()) + " does not match");
                 }
 
             }
@@ -98,7 +97,7 @@ public class Menu {
             public void actionPerformed(ActionEvent e) {
                 Performance performance = new Performance();
 
-                performance.show();
+                performance.show(null);
             }
 
         }

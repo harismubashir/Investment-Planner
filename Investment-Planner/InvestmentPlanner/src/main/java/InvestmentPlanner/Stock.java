@@ -13,10 +13,10 @@ package InvestmentPlanner;
  */
 public class Stock {
 
-    public String stockName;
-    public String ticker;
-    public int noOfStocks;
-    public double purchasePrice;
+    public String stockName = "Peloton";
+    public String ticker = "PTON";
+    public int noOfStocks = 5;
+    public double purchasePrice = 110.00;
     public String purchaseDateTime;
 
 }

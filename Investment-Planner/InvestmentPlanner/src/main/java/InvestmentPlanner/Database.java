@@ -10,7 +10,7 @@ public class Database {
 
         for (int i = 0; i < plans.size(); i++) {
 
-            if (plans.get(i).planNo.equals(select)) {
+            if (Integer.valueOf(plans.get(i).planNo) == select) {
                 return plans.get(i);
 
             }

@@ -28,7 +28,7 @@ public class Ticker {
         JFrame pickForm = new JFrame();
         int rowHeight = 200;
 
-        JButton addDeleteButton = new JButton((mode == Mode.CREATING) ? "Add" : "Delete");
+        JButton buySellButton = new JButton((mode == Mode.CREATING) ? "Buy" : "Sell");
         JLabel tickerLabel = new JLabel("Stock Name");
         JTextField tickerTextField = new JTextField("Stock Ticker", 30);
 
@@ -41,12 +41,12 @@ public class Ticker {
         searchButton.setBounds(150, 150, 100, 40);
         tickerLabel.setBounds(50, 25, 100, 40);
         tickerTextField.setBounds(150, 25, 100, 40);
-        addDeleteButton.setBounds(150, 200, 100, 30);
+        buySellButton.setBounds(150, 200, 100, 30);
 
         noOfStocksLabel.setBounds(50, 75, 100, 40);
         noOfStocksTextField.setBounds(150, 75, 100, 40);
 
-        pickForm.setName("Select Investment");
+        pickForm.setName("Stocks List");
 
         pickForm.add(tickerLabel);
         pickForm.add(tickerTextField);
@@ -56,15 +56,15 @@ public class Ticker {
 
         pickForm.add(searchButton);
 
-        pickForm.add(addDeleteButton);
+        pickForm.add(buySellButton);
 
         pickForm.setSize(400, 500);
         pickForm.setLayout(null);
 
         final JComboBox<String> stockDropdown = new JComboBox<String>();
 
-        String[] columnNames = { "Stock", "Price", "Date" };
-        String[][] stocksListData = new String[plan.stocks.size()][3];
+        String[] columnNames = { "Stock", "Price", "Date", "Number" };
+        String[][] stocksListData = new String[plan.stocks.size()][4];
 
         if (mode == Mode.EDITING) {
             for (int i = 0; i < plan.stocks.size(); i++) {
@@ -72,6 +72,7 @@ public class Ticker {
                 stocksListData[i][0] = plan.stocks.get(i).stockName;
                 stocksListData[i][1] = String.valueOf(plan.stocks.get(i).purchasePrice);
                 stocksListData[i][2] = plan.stocks.get(i).purchaseDateTime;
+                stocksListData[i][3] = String.valueOf(plan.stocks.get(i).noOfStocks);
             }
 
             stockDropdown.addActionListener(new ActionListener() {
@@ -81,7 +82,7 @@ public class Ticker {
             });
             JTable stocksTable;
             stocksTable = new JTable(stocksListData, columnNames);
-            stocksTable.setBounds(50, 250, 300, 20 * plan.stocks.size());
+            stocksTable.setBounds(50, 250, 500, 20 * plan.stocks.size());
             stockDropdown.setBounds(150, 25, 100, 30);
             pickForm.remove(tickerTextField);
             pickForm.add(stocksTable);
@@ -115,7 +116,7 @@ public class Ticker {
 
         );
 
-        addDeleteButton.addActionListener(new ActionListener() {
+        buySellButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Stock stock = new Stock();
                 stock.stockName = stockData[0];
@@ -124,9 +125,22 @@ public class Ticker {
 
                 if (mode == Mode.CREATING) {
                     plan.stocks.add(stock);
+                    stock.noOfStocks = Integer.valueOf(noOfStocksTextField.getText());
                 } else {
                     plan.stocks.add(Integer.valueOf(plan.planNo) + 1, stock);
+                    stock.noOfStocks = Integer.valueOf(noOfStocksTextField.getText()) * -1;
                 }
+
+                stocksListData[plan.stocks.size()][0] = stockData[0];
+                stocksListData[plan.stocks.size()][1] = stockData[1];
+                stocksListData[plan.stocks.size()][2] = stockData[2];
+                stocksListData[plan.stocks.size()][3] = String.valueOf(stock.noOfStocks);
+                JTable stocksTable;
+                stocksTable = new JTable(stocksListData, columnNames);
+                stocksTable.setBounds(50, 250, 500, 20 * plan.stocks.size());
+                stockDropdown.setBounds(150, 25, 100, 30);
+                pickForm.add(stocksTable);
+
             }
 
         }
