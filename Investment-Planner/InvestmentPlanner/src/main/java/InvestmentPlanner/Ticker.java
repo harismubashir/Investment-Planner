@@ -22,6 +22,8 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class Ticker {
 
     public String[] stockData = new String[4];
+    JTable stocksTable;
+    String[][] stocksListData;
 
     public void show(Mode mode, Plan plan) {
 
@@ -64,9 +66,9 @@ public class Ticker {
         final JComboBox<String> stockDropdown = new JComboBox<String>();
 
         String[] columnNames = { "Stock", "Price", "Date", "Number" };
-        String[][] stocksListData = new String[plan.stocks.size()][4];
 
         if (mode == Mode.EDITING) {
+            stocksListData = new String[plan.stocks.size()][4];
             for (int i = 0; i < plan.stocks.size(); i++) {
                 stockDropdown.addItem(plan.stocks.get(i).stockName);
                 stocksListData[i][0] = plan.stocks.get(i).stockName;
@@ -80,7 +82,7 @@ public class Ticker {
                     tickerTextField.setText("You Selected : " + (stockDropdown.getSelectedItem()));
                 }
             });
-            JTable stocksTable;
+
             stocksTable = new JTable(stocksListData, columnNames);
             stocksTable.setBounds(50, 250, 500, 20 * plan.stocks.size());
             stockDropdown.setBounds(150, 25, 100, 30);
@@ -131,15 +133,18 @@ public class Ticker {
                     stock.noOfStocks = Integer.valueOf(noOfStocksTextField.getText()) * -1;
                 }
 
-                stocksListData[plan.stocks.size()][0] = stockData[0];
-                stocksListData[plan.stocks.size()][1] = stockData[1];
-                stocksListData[plan.stocks.size()][2] = stockData[2];
-                stocksListData[plan.stocks.size()][3] = String.valueOf(stock.noOfStocks);
-                JTable stocksTable;
+                stocksListData = new String[plan.stocks.size()][4];
+                stocksListData[plan.stocks.size() - 1][0] = stockData[0];
+                stocksListData[plan.stocks.size() - 1][1] = stockData[1];
+                stocksListData[plan.stocks.size() - 1][2] = stockData[2];
+                stocksListData[plan.stocks.size() - 1][3] = String.valueOf(stock.noOfStocks);
+                if (stocksTable != null)
+                    pickForm.remove(stocksTable);
                 stocksTable = new JTable(stocksListData, columnNames);
                 stocksTable.setBounds(50, 250, 500, 20 * plan.stocks.size());
                 stockDropdown.setBounds(150, 25, 100, 30);
                 pickForm.add(stocksTable);
+                pickForm.repaint();
 
             }
 
@@ -185,6 +190,14 @@ public class Ticker {
 
     public void showList(Plan planList) {
 
+    }
+
+    public void updateList(Stock[] stocks) {
+        if (stocksTable != null) {
+            // remove stocksTable
+        }
+
+        /// stocksTable = new JTable(...)
     }
 
 }

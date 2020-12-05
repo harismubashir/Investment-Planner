@@ -4,6 +4,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.data.xy.XYDataset;
 
 import javax.swing.JComboBox;
 
@@ -23,15 +29,18 @@ public class Performance {
         JLabel selectPlanLabel = new JLabel("Dollar Return");
         JLabel percentageReturnLabel = new JLabel("Percentage Return");
         JLabel monthlyGrowthLabel = new JLabel("Monthly Growth");
-        // JFreeChart chart = new JFreeChart;
-        // chart.createXYLineChart("Test Chart",
-        // "x", "y", ds, PlotOrientation.VERTICAL, true, true,
-        // false);
+
+        XYDataset ds = createDataset();
+
+        JFreeChart chart = ChartFactory.createXYLineChart("Test Chart", "x", "y", ds, PlotOrientation.VERTICAL, true,
+                true, false);
+
+        ChartPanel cp = new ChartPanel(chart);
 
         JTextField dollarReturnTextField = new JTextField("Name of plan", 30);
         JTextField percentageReturnTextField = new JTextField("$", 30);
         JTextField monthlyGrowthTextField = new JTextField("$", 30);
-        JTextField percentageReturnTextfield = new JTextField("...---~|```", 30);
+
 
         JComboBox<String> selectPlanComboBox = new JComboBox<String>();
 
@@ -50,7 +59,7 @@ public class Performance {
         selectPlanComboBox.setBounds(200, 60, 200, 40);
         percentageReturnTextField.setBounds(200, 140, 200, 40);
         monthlyGrowthTextField.setBounds(200, 200, 200, 40);
-        percentageReturnTextfield.setBounds(100, 300, 200, 200);
+        cp.setBounds(100, 300, 200, 200);
 
         performanceForm.add(performanceLabel);
         performanceForm.add(selectPlanLabel);
@@ -60,6 +69,7 @@ public class Performance {
 
         performanceForm.add(closebutton);
         performanceForm.add(selectPlanButton);
+        performanceForm.add(cp);
 
         Plan performancePlan = new Plan();
 
@@ -73,7 +83,7 @@ public class Performance {
         performanceForm.add(dollarReturnTextField);
         performanceForm.add(percentageReturnTextField);
         performanceForm.add(monthlyGrowthTextField);
-        performanceForm.add(percentageReturnTextfield);
+
 
         performanceForm.setSize(800, 1000);
         performanceForm.setLayout(null);
@@ -124,6 +134,17 @@ public class Performance {
         ;
         return totalFunds;
 
+    }
+
+    private XYDataset createDataset() {
+
+        DefaultXYDataset ds = new DefaultXYDataset();
+
+        double[][] data = { { 0.1, 0.2, 0.3 }, { 1, 2, 3 } };
+
+        ds.addSeries("series1", data);
+
+        return ds;
     }
 
     // Skip the graph
