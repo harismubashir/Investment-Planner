@@ -6,11 +6,11 @@ public class Database {
     public static ArrayList<Plan> plans;
     public static ArrayList<Stock> stocks;
 
-    static Plan getPlanByNumber(int select) throws Exception {
+    static Plan getPlanByNumber(int planNoRequested) throws Exception {
 
         for (int i = 0; i < plans.size(); i++) {
 
-            if (Integer.valueOf(plans.get(i).planNo) == select) {
+            if (Integer.valueOf(plans.get(i).index) == planNoRequested) {
                 return plans.get(i);
 
             }

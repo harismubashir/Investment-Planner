@@ -20,8 +20,10 @@ public class CreateEdit {
         if (mode == Mode.CREATING) {
             arrayIndex = Database.plans.size() + 1;
             newPlan = new Plan();
+
         } else {
             newPlan = plan;
+            arrayIndex = Integer.valueOf(newPlan.index);
         }
 
         JLabel createLabel = new JLabel((mode == Mode.CREATING) ? "Create Plan" : "Edit Plan");
@@ -107,7 +109,8 @@ public class CreateEdit {
 
             public void actionPerformed(ActionEvent e) {
 
-                newPlan.planNo = String.valueOf(arrayIndex);
+                newPlan.planNo = planNoTextField.getText();
+                newPlan.index = String.valueOf(arrayIndex);
                 newPlan.dateObj = new Date();
                 newPlan.recurringContribution = Double.parseDouble(recurringContributionTextFied.getText());
                 newPlan.riskTolerance = Integer.parseInt(riskToleranceTextField.getText());

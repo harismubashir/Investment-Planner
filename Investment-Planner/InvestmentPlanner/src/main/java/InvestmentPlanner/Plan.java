@@ -16,6 +16,7 @@ import java.util.Date;
 public class Plan {
 
     public String name = "Haris";
+    public String index = "1";
     public String planNo = "1";
     public Double totalFunds = 20000.0;
     public Double recurringContribution = 1000.0;

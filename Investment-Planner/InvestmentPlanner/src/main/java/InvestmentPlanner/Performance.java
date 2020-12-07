@@ -21,6 +21,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class Performance {
 
     public Plan performancePlan = new Plan();
+    public String selectedPlanNo;
 
     public void show(Plan plan) {
 
@@ -38,6 +39,7 @@ public class Performance {
 
         ChartPanel performanceChartPanel = new ChartPanel(chart);
 
+        JTextField selectedPlanTextField = new JTextField("Plan No", 30);
         JTextField dollarReturnTextField = new JTextField("Name of plan", 30);
         JTextField percentageReturnTextField = new JTextField("$", 30);
         JTextField monthlyGrowthTextField = new JTextField("$", 30);
@@ -50,6 +52,7 @@ public class Performance {
         performanceLabel.setBounds(100, 20, 120, 40);
 
         selectPlanLabel.setBounds(75, 60, 200, 40);
+        selectedPlanTextField.setBounds(75, 60, 200, 40);
         percentageReturnLabel.setBounds(75, 140, 200, 40);
         monthlyGrowthLabel.setBounds(75, 200, 200, 40);
         selectPlanButton.setBounds(450, 80, 100, 40);
@@ -71,11 +74,10 @@ public class Performance {
 
         for (int i = 0; i <= Database.plans.size(); i++) {
             try {
-                selectPlanComboBox.addItem(Database.plans.get(i).planNo);
+                selectPlanComboBox.addItem(String.valueOf(i + 1) + ") " + Database.plans.get(i).planNo);
             } catch (Exception e1) {
                 // TODO Auto-generated catch block
                 showMessageDialog(null, "No saved plans exist.");
-                ;
             }
 
         }
@@ -91,23 +93,30 @@ public class Performance {
         performanceForm.setLayout(null);
         performanceForm.setVisible(true);
 
-        selectPlanButton.addActionListener(new ActionListener() {
+        selectPlanComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(selectPlanComboBox.getSelectedIndex() + "" + Database.plans.size());
-                if (selectPlanComboBox.getSelectedIndex() <= Database.plans.size())
+                selectedPlanTextField.setText(String.valueOf(selectPlanComboBox.getSelectedIndex()));
+                selectedPlanNo = selectedPlanTextField.getText();
+            }
+        });
+
+        selectPlanButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+
+                if (Integer.valueOf(selectedPlanNo) <= Database.plans.size())
                     try {
-                        performancePlan = Database.getPlanByNumber(Integer.valueOf(selectPlanComboBox.getselectedItem()) + 1);
-                        dollarReturnTextField.setText(String.valueOf(calculatePerformanceMetric(5, performancePlan)));
+                        System.out.println(selectedPlanNo);
+                        performancePlan = Database.getPlanByNumber(Integer.valueOf(selectedPlanNo) + 1);
+                        dollarReturnTextField.setText(String.valueOf(calculatePerformanceMetric(performancePlan)));
                     } catch (Exception e1) {
                         // TODO show error to user
                         showMessageDialog(null, "Plan not found, please enter correct no.");
                     }
                 else {
-                    showMessageDialog(null, "Plan No" + (selectPlanComboBox.getSelectedIndex()) + " does not match");
+                    showMessageDialog(null, "Plan No" + selectedPlanNo + " does not match");
                 }
-
             }
-
         });
 
         closebutton.addActionListener(new ActionListener() {
@@ -127,7 +136,7 @@ public class Performance {
      * @param months pass in the length of the investment in months
      */
 
-    public double calculatePerformanceMetric(int months, Plan planNo) {
+    public double calculatePerformanceMetric(Plan planNo) {
         double totalFunds = 0;
         for (int i = 0; i <= planNo.stocks.size(); i++) {
             totalFunds = totalFunds + planNo.stocks.get(i).purchasePrice;
@@ -148,7 +157,7 @@ public class Performance {
         return ds;
     }
 
-    // Skip the graph
-    // Calculate ROI's on stocks using for loops
-
 }
+
+// Skip the graph
+// Calculate ROI's on stocks using for loops

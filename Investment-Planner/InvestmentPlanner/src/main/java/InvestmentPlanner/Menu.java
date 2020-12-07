@@ -35,7 +35,7 @@ public class Menu {
 
         editPlanNoComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                selectedPlanTextField.setText(String.valueOf(editPlanNoComboBox.getSelectedIndex()));
+                selectedPlanTextField.setText(String.valueOf(editPlanNoComboBox.getSelectedItem()));
             }
         });
 
@@ -74,13 +74,14 @@ public class Menu {
 
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(editPlanNoComboBox.getSelectedIndex() + "" + Database.plans.size());
+                System.out.println(
+                        editPlanNoComboBox.getSelectedIndex() + "check value is less than " + Database.plans.size());
                 if (editPlanNoComboBox.getSelectedIndex() <= Database.plans.size())
                     try {
 
                         CreateEdit c = new CreateEdit();
                         c.show(Mode.EDITING,
-                                Database.getPlanByNumber(Integer.valueOf(selectedPlanTextField.getText()) + 1));
+                                Database.getPlanByNumber(editPlanNoComboBox.getSelectedIndex()+1));
                     } catch (Exception e1) {
                         // TODO show error to user
                         showMessageDialog(null, "Plan not found, please enter correct no.");
