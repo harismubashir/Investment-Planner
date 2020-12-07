@@ -28,7 +28,7 @@ public class Menu {
         JTextField selectedPlanTextField = new JTextField();
         JComboBox<Integer> editPlanNoComboBox = new JComboBox<Integer>();
 
-        for (int c = 1; c < 5; c++) {
+        for (int c = 1; c <= 5; c++) {
             editPlanNoComboBox.addItem(c);
 
         }
@@ -80,8 +80,7 @@ public class Menu {
                     try {
 
                         CreateEdit c = new CreateEdit();
-                        c.show(Mode.EDITING,
-                                Database.getPlanByNumber(editPlanNoComboBox.getSelectedIndex()+1));
+                        c.show(Mode.EDITING, Database.getPlanByNumber(editPlanNoComboBox.getSelectedIndex() + 1));
                     } catch (Exception e1) {
                         // TODO show error to user
                         showMessageDialog(null, "Plan not found, please enter correct no.");

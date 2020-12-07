@@ -52,7 +52,8 @@ public class Performance {
         performanceLabel.setBounds(100, 20, 120, 40);
 
         selectPlanLabel.setBounds(75, 60, 200, 40);
-        selectedPlanTextField.setBounds(75, 60, 200, 40);
+        selectedPlanTextField.setBounds(200, 60, 200, 40);
+        dollarReturnTextField.setBounds(200, 110, 200, 40);
         percentageReturnLabel.setBounds(75, 140, 200, 40);
         monthlyGrowthLabel.setBounds(75, 200, 200, 40);
         selectPlanButton.setBounds(450, 80, 100, 40);
@@ -84,7 +85,6 @@ public class Performance {
         ;
 
         performanceForm.add(selectPlanComboBox);
-
         performanceForm.add(dollarReturnTextField);
         performanceForm.add(percentageReturnTextField);
         performanceForm.add(monthlyGrowthTextField);
@@ -106,9 +106,11 @@ public class Performance {
 
                 if (Integer.valueOf(selectedPlanNo) <= Database.plans.size())
                     try {
-                        System.out.println(selectedPlanNo);
                         performancePlan = Database.getPlanByNumber(Integer.valueOf(selectedPlanNo) + 1);
-                        dollarReturnTextField.setText(String.valueOf(calculatePerformanceMetric(performancePlan)));
+                        dollarReturnTextField.setText("You have a LOTT of money");
+                        percentageReturnTextField.setText(performancePlan.planNo);
+                        // dollarReturnTextField.setText(String.valueOf(calculatePerformanceMetric(performancePlan)));
+
                     } catch (Exception e1) {
                         // TODO show error to user
                         showMessageDialog(null, "Plan not found, please enter correct no.");
@@ -139,7 +141,7 @@ public class Performance {
     public double calculatePerformanceMetric(Plan planNo) {
         double totalFunds = 0;
         for (int i = 0; i <= planNo.stocks.size(); i++) {
-            totalFunds = totalFunds + planNo.stocks.get(i).purchasePrice;
+            // totalFunds = totalFunds + planNo.stocks.get(i).purchasePrice;
         }
         ;
         return totalFunds;
