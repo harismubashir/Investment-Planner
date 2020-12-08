@@ -102,9 +102,9 @@ public class Ticker {
                     final String[] tickerSearchResult = stockInfo((mode == Mode.CREATING) ? tickerTextField.getText()
                             : String.valueOf(stockDropdown.getSelectedItem()));
 
-                    JTextField stockTextField = new JTextField(tickerSearchResult[0] + "  " + tickerSearchResult[1],
-                            30);
-                    stockTextField.setBounds(150, rowHeight + 10, 100, 40);
+                    JTextField stockTextField = new JTextField(
+                            tickerSearchResult[0] + " buy/sell @" + tickerSearchResult[1], 30);
+                    stockTextField.setBounds(150, rowHeight + 30, 130, 40);
                     pickForm.add(stockTextField);
                     plan.totalFunds = plan.totalFunds + Double.parseDouble(tickerSearchResult[1])
                             * Double.parseDouble(noOfStocksTextField.getText());
@@ -141,7 +141,7 @@ public class Ticker {
                 if (stocksTable != null)
                     pickForm.remove(stocksTable);
                 stocksTable = new JTable(stocksListData, columnNames);
-                stocksTable.setBounds(50, 250, 500, 20 * plan.stocks.size());
+                stocksTable.setBounds(50, 270, 500, 20 * plan.stocks.size());
                 stockDropdown.setBounds(150, 25, 100, 30);
                 pickForm.add(stocksTable);
                 pickForm.repaint();
