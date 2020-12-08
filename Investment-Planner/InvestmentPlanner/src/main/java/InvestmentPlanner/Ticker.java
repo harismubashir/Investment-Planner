@@ -104,7 +104,7 @@ public class Ticker {
 
                     JTextField stockTextField = new JTextField(tickerSearchResult[0] + "  " + tickerSearchResult[1],
                             30);
-                    stockTextField.setBounds(150, rowHeight + 40, 100, 40);
+                    stockTextField.setBounds(150, rowHeight + 10, 100, 40);
                     pickForm.add(stockTextField);
                     plan.totalFunds = plan.totalFunds + Double.parseDouble(tickerSearchResult[1])
                             * Double.parseDouble(noOfStocksTextField.getText());

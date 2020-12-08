@@ -23,7 +23,7 @@ public class Performance {
     public Plan performancePlan = new Plan();
     public String selectedPlanNo;
     JTextField selectedPlanTextField = new JTextField("Plan No", 30);
-    JTextField dollarReturnTextField = new JTextField("Name of plan", 30);
+    JTextField dollarReturnTextField = new JTextField("$$$", 30);
     JTextField percentageReturnTextField = new JTextField("$", 30);
     JTextField monthlyGrowthTextField = new JTextField("$", 30);
 
@@ -32,7 +32,8 @@ public class Performance {
         JFrame performanceForm = new JFrame();
 
         JLabel performanceLabel = new JLabel("Investment Performance");
-        JLabel selectPlanLabel = new JLabel("Dollar Return");
+        JLabel selectPlanLabel = new JLabel("Select Plan");
+        JLabel dollarReturnLabel = new JLabel("Dollar Return");
         JLabel percentageReturnLabel = new JLabel("Percentage Return");
         JLabel monthlyGrowthLabel = new JLabel("Monthly Growth");
 
@@ -43,8 +44,6 @@ public class Performance {
 
         ChartPanel performanceChartPanel = new ChartPanel(chart);
 
-
-
         JComboBox<String> selectPlanComboBox = new JComboBox<String>();
 
         JButton selectPlanButton = new JButton("Select Plan");
@@ -53,15 +52,17 @@ public class Performance {
         performanceLabel.setBounds(100, 20, 120, 40);
 
         selectPlanLabel.setBounds(75, 60, 200, 40);
-        selectedPlanTextField.setBounds(200, 60, 200, 40);
-        dollarReturnTextField.setBounds(200, 110, 200, 40);
-        percentageReturnLabel.setBounds(75, 140, 200, 40);
+        dollarReturnLabel.setBounds(75, 110, 200, 40);
+
+        percentageReturnLabel.setBounds(75, 150, 200, 40);
         monthlyGrowthLabel.setBounds(75, 200, 200, 40);
         selectPlanButton.setBounds(450, 80, 100, 40);
         closebutton.setBounds(110, 520, 100, 40);
 
         selectPlanComboBox.setBounds(200, 60, 200, 40);
-        percentageReturnTextField.setBounds(200, 140, 200, 40);
+        selectedPlanTextField.setBounds(200, 60, 200, 40);
+        dollarReturnTextField.setBounds(200, 110, 200, 40);
+        percentageReturnTextField.setBounds(200, 150, 200, 40);
         monthlyGrowthTextField.setBounds(200, 200, 200, 40);
         performanceChartPanel.setBounds(100, 300, 400, 200);
 
@@ -69,16 +70,16 @@ public class Performance {
         performanceForm.add(selectPlanLabel);
         performanceForm.add(percentageReturnLabel);
         performanceForm.add(monthlyGrowthLabel);
+        performanceForm.add(dollarReturnLabel);
 
         performanceForm.add(closebutton);
         performanceForm.add(selectPlanButton);
         performanceForm.add(performanceChartPanel);
 
-        for (int i = 0; i <= Database.plans.size(); i++) {
+        for (int i = 0; i < Database.plans.size(); i++) {
             try {
                 selectPlanComboBox.addItem(String.valueOf(i + 1) + ") " + Database.plans.get(i).planNo);
             } catch (Exception e1) {
-                // TODO Auto-generated catch block
                 showMessageDialog(null, "No saved plans exist.");
             }
 
@@ -143,8 +144,9 @@ public class Performance {
         double totalFunds = 0;
         for (int i = 0; i < planNo.stocks.size(); i++) {
             totalFunds = totalFunds + planNo.stocks.get(i).purchasePrice;
-        };
-       
+        }
+        ;
+
         dollarReturnTextField.setText(String.valueOf(totalFunds));
     }
 
@@ -152,7 +154,7 @@ public class Performance {
 
         DefaultXYDataset ds = new DefaultXYDataset();
 
-        double[][] data = { { 0.1, 0.2, 0.3 }, { 1, 2, 3 } };
+        double[][] data = { { 1, 2, 3 }, { 1, 2, 3 } };
 
         ds.addSeries("series1", data);
 

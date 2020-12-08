@@ -18,4 +18,20 @@ public class Database {
         }
         throw new Exception("Plan not found");
     }
+
+    static double totalInvestment(Plan plan) throws Exception {
+        double investment = 0;
+
+        if(plan!= null){
+        
+            for (int i = 0; i < plan.stocks.size(); i++) {
+                investment = investment + plan.stocks.get(i).purchasePrice;
+            };
+        }
+
+        investment = investment + plan.totalFunds;
+    
+        return investment;
+
+    }
 }

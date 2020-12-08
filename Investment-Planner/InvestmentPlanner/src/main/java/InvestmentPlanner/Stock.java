@@ -18,5 +18,7 @@ public class Stock {
     public int noOfStocks;
     public double purchasePrice;
     public String purchaseDateTime;
+    public double totalInvestment;
 
+    
 }
