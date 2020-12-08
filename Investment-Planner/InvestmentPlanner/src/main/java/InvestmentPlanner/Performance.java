@@ -22,6 +22,10 @@ public class Performance {
 
     public Plan performancePlan = new Plan();
     public String selectedPlanNo;
+    JTextField selectedPlanTextField = new JTextField("Plan No", 30);
+    JTextField dollarReturnTextField = new JTextField("Name of plan", 30);
+    JTextField percentageReturnTextField = new JTextField("$", 30);
+    JTextField monthlyGrowthTextField = new JTextField("$", 30);
 
     public void show(Plan plan) {
 
@@ -39,10 +43,7 @@ public class Performance {
 
         ChartPanel performanceChartPanel = new ChartPanel(chart);
 
-        JTextField selectedPlanTextField = new JTextField("Plan No", 30);
-        JTextField dollarReturnTextField = new JTextField("Name of plan", 30);
-        JTextField percentageReturnTextField = new JTextField("$", 30);
-        JTextField monthlyGrowthTextField = new JTextField("$", 30);
+
 
         JComboBox<String> selectPlanComboBox = new JComboBox<String>();
 
@@ -109,7 +110,7 @@ public class Performance {
                         performancePlan = Database.getPlanByNumber(Integer.valueOf(selectedPlanNo) + 1);
                         dollarReturnTextField.setText("You have a LOTT of money");
                         percentageReturnTextField.setText(performancePlan.planNo);
-                        // dollarReturnTextField.setText(String.valueOf(calculatePerformanceMetric(performancePlan)));
+                        calculatePerformanceMetric(performancePlan);
 
                     } catch (Exception e1) {
                         // TODO show error to user
@@ -132,20 +133,19 @@ public class Performance {
     }
 
     /**
-     * Does x
+     * Takes the Plan and returns the return on investment in dollar value
      *
      * @param roi    this is the ROI that should be passed to this function
      * @param months pass in the length of the investment in months
      */
 
-    public double calculatePerformanceMetric(Plan planNo) {
+    public void calculatePerformanceMetric(Plan planNo) {
         double totalFunds = 0;
-        for (int i = 0; i <= planNo.stocks.size(); i++) {
-            // totalFunds = totalFunds + planNo.stocks.get(i).purchasePrice;
-        }
-        ;
-        return totalFunds;
-
+        for (int i = 0; i < planNo.stocks.size(); i++) {
+            totalFunds = totalFunds + planNo.stocks.get(i).purchasePrice;
+        };
+       
+        dollarReturnTextField.setText(String.valueOf(totalFunds));
     }
 
     private XYDataset createDataset() {
