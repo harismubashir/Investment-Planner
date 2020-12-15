@@ -22,6 +22,15 @@ public class Performance {
 
     public Plan performancePlan = new Plan();
     public String selectedPlanNo;
+    public double totalFunds;
+    public double portfolioValueLastMonth;
+    public double portfolioValueTwoMonthsAgo;
+    JFrame performanceForm = new JFrame();
+    XYDataset ds = createDataset();
+    JFreeChart chart = ChartFactory.createXYLineChart("Return on Investment", "Date", "Dollars", ds,
+            PlotOrientation.VERTICAL, true, true, false);
+
+    ChartPanel performanceChartPanel = new ChartPanel(chart);
     JTextField selectedPlanTextField = new JTextField("Plan No", 30);
     JTextField dollarReturnTextField = new JTextField("$$$", 30);
     JTextField percentageReturnTextField = new JTextField("$", 30);
@@ -29,20 +38,11 @@ public class Performance {
 
     public void show(Plan plan) {
 
-        JFrame performanceForm = new JFrame();
-
         JLabel performanceLabel = new JLabel("Investment Performance");
         JLabel selectPlanLabel = new JLabel("Select Plan");
         JLabel dollarReturnLabel = new JLabel("Dollar Return");
         JLabel percentageReturnLabel = new JLabel("Percentage Return");
         JLabel monthlyGrowthLabel = new JLabel("Monthly Growth");
-
-        XYDataset ds = createDataset();
-
-        JFreeChart chart = ChartFactory.createXYLineChart("Return on Investment", "Date", "Dollars", ds,
-                PlotOrientation.VERTICAL, true, true, false);
-
-        ChartPanel performanceChartPanel = new ChartPanel(chart);
 
         JComboBox<String> selectPlanComboBox = new JComboBox<String>();
 
@@ -74,7 +74,6 @@ public class Performance {
 
         performanceForm.add(closebutton);
         performanceForm.add(selectPlanButton);
-        performanceForm.add(performanceChartPanel);
 
         for (int i = 0; i < Database.plans.size(); i++) {
             try {
@@ -109,8 +108,6 @@ public class Performance {
                 if (Integer.valueOf(selectedPlanNo) <= Database.plans.size())
                     try {
                         performancePlan = Database.getPlanByNumber(Integer.valueOf(selectedPlanNo) + 1);
-                        dollarReturnTextField.setText("You have a LOTT of money");
-                        percentageReturnTextField.setText(performancePlan.planNo);
                         calculatePerformanceMetric(performancePlan);
 
                     } catch (Exception e1) {
@@ -141,23 +138,32 @@ public class Performance {
      */
 
     public void calculatePerformanceMetric(Plan planNo) {
-        double totalFunds = 0;
+        totalFunds = 0;
+        portfolioValueLastMonth = 0;
+        portfolioValueTwoMonthsAgo = 0;
+        performanceForm.remove(performanceChartPanel);
+
         for (int i = 0; i < planNo.stocks.size(); i++) {
             totalFunds = totalFunds + planNo.stocks.get(i).purchasePrice;
-        }
-        ;
-
+            portfolioValueLastMonth = portfolioValueLastMonth + planNo.stocks.get(i).priceOneMonthAgo;
+            portfolioValueTwoMonthsAgo = portfolioValueTwoMonthsAgo + planNo.stocks.get(i).priceTwoMonthsAgo;
+        };
+        ds = createDataset();
+        chart = ChartFactory.createXYLineChart("Return on Investment on"+planNo.planNo, "Date", "Dollars", ds,
+            PlotOrientation.VERTICAL, true, true, false);
+            
         dollarReturnTextField.setText(String.valueOf(totalFunds));
+        performanceForm.add(performanceChartPanel);
     }
 
     private XYDataset createDataset() {
 
         DefaultXYDataset ds = new DefaultXYDataset();
 
-        double[][] data = { { 1, 2, 3 }, { 1, 2, 3 } };
+        double[][] data = { { portfolioValueTwoMonthsAgo, portfolioValueLastMonth, totalFunds }, { 3, 2, 1 } };
 
-        ds.addSeries("series1", data);
-
+        ds.addSeries("x-axis value is months", data);
+        System.out.println(portfolioValueTwoMonthsAgo + "  " + portfolioValueLastMonth + "  " + totalFunds);
         return ds;
     }
 

@@ -21,7 +21,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Ticker {
 
-    public String[] stockData = new String[4];
+    public String[] stockData = new String[6];
     JTable stocksTable;
     String[][] stocksListData;
 
@@ -176,9 +176,9 @@ public class Ticker {
                 .getAsString();
         String price = e2.getAsJsonObject().get("Time Series (5min)").getAsJsonObject().get(lastRefereshedTime)
                 .getAsJsonObject().get("4. close").getAsString();
+
         System.out.println(symbol);
         System.out.println(lastRefereshedTime);
-        System.out.println(price);
 
         stockData[0] = symbol;
         stockData[1] = price;

@@ -19,6 +19,8 @@ public class Stock {
     public double purchasePrice;
     public String purchaseDateTime;
     public double totalInvestment;
+    public double priceOneMonthAgo;
+    public double priceTwoMonthsAgo;
 
     
 }
