@@ -25,6 +25,7 @@ public class Performance {
     public double totalFunds;
     public double portfolioValueLastMonth;
     public double portfolioValueTwoMonthsAgo;
+    public double percentageReturn;
     JFrame performanceForm = new JFrame();
     XYDataset ds = createDataset();
     JFreeChart chart = ChartFactory.createXYLineChart("Return on Investment", "Date", "Dollars", ds,
@@ -109,6 +110,7 @@ public class Performance {
                     try {
                         performancePlan = Database.getPlanByNumber(Integer.valueOf(selectedPlanNo) + 1);
                         calculatePerformanceMetric(performancePlan);
+                        percentageReturnTextField.setText(String.valueOf(percentageReturn)+"%");
 
                     } catch (Exception e1) {
                         // TODO show error to user
@@ -148,6 +150,9 @@ public class Performance {
             portfolioValueLastMonth = portfolioValueLastMonth + planNo.stocks.get(i).priceOneMonthAgo;
             portfolioValueTwoMonthsAgo = portfolioValueTwoMonthsAgo + planNo.stocks.get(i).priceTwoMonthsAgo;
         };
+
+        percentageReturn = (portfolioValueLastMonth/totalFunds)*100;
+
         ds = createDataset();
         chart = ChartFactory.createXYLineChart("Return on Investment on"+planNo.planNo, "Date", "Dollars", ds,
             PlotOrientation.VERTICAL, true, true, false);
