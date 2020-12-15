@@ -7,7 +7,6 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
 import java.util.Date;
-import java.util.concurrent.DelayQueue;
 import java.awt.event.ActionEvent;
 
 import com.google.gson.JsonElement;
@@ -128,6 +127,7 @@ public class CreateEdit {
                 saveHistoricalStockData(newPlan);
 
                 System.out.println("Historical Data Updated");
+                showMessageDialog(null, "Plan saved successfully.");
                 Database.plans.add(newPlan);
 
             }
@@ -136,43 +136,40 @@ public class CreateEdit {
 
     }
 
-    public void saveHistoricalStockData (Plan plan){
-        
+    public void saveHistoricalStockData(Plan plan) {
+
         String stock;
 
-        try{
-        for (int i=0; i < plan.stocks.size(); i++ ) {
-             stock = plan.stocks.get(i).stockName;
-            
-        
-            final String stockHistoricalPrice = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol="
-                + stock + "&apikey=XIME2HD6DHN7WPYZ";
-                
+        try {
+            for (int i = 0; i < plan.stocks.size(); i++) {
+                stock = plan.stocks.get(i).stockName;
 
-            final HttpResponse<String> httpResponseHistorical = Unirest.get(stockHistoricalPrice).asString();
-            if (httpResponseHistorical.getBody().contains("Thank you for using Alpha Vantage!")) {
-                try {
-                    showMessageDialog(null, "Please wait 1 minute while plan updates");
-                    Thread.sleep(1000);
-                  } catch (InterruptedException ex) {
-                    showMessageDialog(null, "Press save again");
-                  }
+                final String stockHistoricalPrice = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol="
+                        + stock + "&apikey=XIME2HD6DHN7WPYZ";
 
-               
+                final HttpResponse<String> httpResponseHistorical = Unirest.get(stockHistoricalPrice).asString();
+                if (httpResponseHistorical.getBody().contains("Thank you for using Alpha Vantage!")) {
+                    try {
+                        showMessageDialog(null, "Please wait 1 minute while plan updates");
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        showMessageDialog(null, "Press save again");
+                    }
+
+                }
+
+                JsonElement e3 = JsonParser.parseString(httpResponseHistorical.getBody());
+                plan.stocks.get(i).priceOneMonthAgo = e3.getAsJsonObject().get("Monthly Time Series").getAsJsonObject()
+                        .get("2020-11-30").getAsJsonObject().get("4. close").getAsDouble();
+
+                plan.stocks.get(i).priceTwoMonthsAgo = e3.getAsJsonObject().get("Monthly Time Series").getAsJsonObject()
+                        .get("2020-10-30").getAsJsonObject().get("4. close").getAsDouble();
+
             }
-            
-            JsonElement e3 = JsonParser.parseString(httpResponseHistorical.getBody());
-            plan.stocks.get(i).priceOneMonthAgo = e3.getAsJsonObject().get("Monthly Time Series").getAsJsonObject().get("2020-11-30")
-                .getAsJsonObject().get("4. close").getAsDouble();
+        } catch (Exception e) {
+            showMessageDialog(null, "Request limit exceeded");
 
-            plan.stocks.get(i).priceTwoMonthsAgo = e3.getAsJsonObject().get("Monthly Time Series").getAsJsonObject().get("2020-10-30")
-                .getAsJsonObject().get("4. close").getAsDouble();
-                
         }
-    }catch (Exception e){
-        showMessageDialog(null, "Request limit exceeded");
-
-    }
 
     }
 

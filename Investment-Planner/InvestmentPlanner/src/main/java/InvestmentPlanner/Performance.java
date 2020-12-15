@@ -26,6 +26,7 @@ public class Performance {
     public double portfolioValueLastMonth;
     public double portfolioValueTwoMonthsAgo;
     public double percentageReturn;
+    public double monthlyReturn;
     JFrame performanceForm = new JFrame();
     XYDataset ds = createDataset();
     JFreeChart chart = ChartFactory.createXYLineChart("Return on Investment", "Date", "Dollars", ds,
@@ -110,7 +111,9 @@ public class Performance {
                     try {
                         performancePlan = Database.getPlanByNumber(Integer.valueOf(selectedPlanNo) + 1);
                         calculatePerformanceMetric(performancePlan);
-                        percentageReturnTextField.setText(String.valueOf(percentageReturn)+"%");
+                        percentageReturnTextField.setText(String.valueOf(percentageReturn) + "%");
+                        dollarReturnTextField.setText(String.valueOf(totalFunds - portfolioValueTwoMonthsAgo));
+                        monthlyGrowthTextField.setText(String.valueOf(monthlyReturn));
 
                     } catch (Exception e1) {
                         // TODO show error to user
@@ -149,14 +152,16 @@ public class Performance {
             totalFunds = totalFunds + planNo.stocks.get(i).purchasePrice;
             portfolioValueLastMonth = portfolioValueLastMonth + planNo.stocks.get(i).priceOneMonthAgo;
             portfolioValueTwoMonthsAgo = portfolioValueTwoMonthsAgo + planNo.stocks.get(i).priceTwoMonthsAgo;
-        };
+        }
+        ;
 
-        percentageReturn = (portfolioValueLastMonth/totalFunds)*100;
+        percentageReturn = (portfolioValueTwoMonthsAgo / totalFunds) * 100;
+        monthlyReturn = (portfolioValueLastMonth / totalFunds) * 100;
 
         ds = createDataset();
-        chart = ChartFactory.createXYLineChart("Return on Investment on"+planNo.planNo, "Date", "Dollars", ds,
-            PlotOrientation.VERTICAL, true, true, false);
-            
+        chart = ChartFactory.createXYLineChart("Return on Investment on" + planNo.planNo, "Date", "Dollars", ds,
+                PlotOrientation.VERTICAL, true, true, false);
+
         dollarReturnTextField.setText(String.valueOf(totalFunds));
         performanceForm.add(performanceChartPanel);
     }
